@@ -1,0 +1,13 @@
+louvre_ticket_achatpage:
+    path:    /achat
+    defaults: { _controller: LOUVRETicketBundle:Ticket:achat }
+    
+louvre_ticket_commandepage:
+    path:    /commande
+    defaults: { _controller: LOUVRETicketBundle:Ticket:commande }
+    
+louvre_ticket_reservationpage:
+    path:    /reservation
+    defaults: { _controller: LOUVRETicketBundle:Ticket:reservation }
+    
+    

@@ -1,0 +1,53 @@
+{# src/LOUVRE/TicketBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Reservation Ticket Musée du LOUVRE{% endblock %}</title>
+
+    {% block stylesheets %} {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> {% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        <div id="header" class="jumbotron">
+            <h1>MUSEE DU LOUVRE</h1>
+            <h2>Réservation de billets</h2>
+        </div>
+
+        <div class="row">
+            <div id="menu" class="col-md-3">
+            <h3>Tarifs</h3>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info">Normal à partir de 12ans : 16€</li>
+                    <li class="list-group-item list-group-item-info">Enfant de 4 à 12ans: 8€</li>
+                    <li class="list-group-item list-group-item-info">Senior à partir de 60ans: 12€</li>
+                    <li class="list-group-item list-group-item-warning">Réduction de 10€ pour éudiant, employé de musée, service du Ministère de la Culture, militaire....</li>
+                    <li class="list-group-item list-group-item-success">Entrée gratuite pour enfant moins de 4ans</li>
+                </ul>
+            </div>
+            <div id="content" class="col-md-9">
+                {% block body %} {% endblock %}
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>The sky's the limit © {{ 'now'|date('Y') }} and beyond.</p>
+        </footer>
+    </div>
+
+    {% block javascripts %} {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<?php
+
+namespace LOUVRE\TicketBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Visiteur
+ *
+ * @ORM\Table(name="visiteur")
+ * @ORM\Entity(repositoryClass="LOUVRE\TicketBundle\Repository\VisiteurRepository")
+ */
+class Visiteur
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255)
+     */
+    private $prenom;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=255)
+     */
+    private $pays;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datedenaissance", type="date")
+     * 
+     */
+    private $datedenaissance;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="tarifreduit", type="boolean")
+     */
+    private $tarifreduit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+    
+    /**
+    * @ORM\ManytoOne(targetEntity="LOUVRE\TicketBundle\Entity\Billet", inversedBy="visiteurs")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $billet;
+    
+
+    
+  
+    public function __construct()
+    {
+        $this->date         = new \Datetime();
+        
+    }
+
+   
+
+}

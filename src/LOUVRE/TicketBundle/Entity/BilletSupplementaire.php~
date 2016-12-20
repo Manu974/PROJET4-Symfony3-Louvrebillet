@@ -1,0 +1,57 @@
+<?php
+
+namespace LOUVRE\TicketBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * BilletSupplementaire
+ *
+ * @ORM\Table(name="billet_supplementaire")
+ * @ORM\Entity(repositoryClass="LOUVRE\TicketBundle\Repository\BilletSupplementaireRepository")
+ */
+class BilletSupplementaire
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datedevisite", type="datetime")
+     */
+    private $datedevisite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="billet", type="string", length=255)
+     */
+    private $billet;
+    
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="datedenaissance", type="date")
+     */
+    private $datedenaissance;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="LOUVRE\TicketBundle\Entity\Visiteur",  inversedBy="billets", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false) 
+     *
+     */
+    private $visiteur;
+
+
+    
+
+
+   
+}
