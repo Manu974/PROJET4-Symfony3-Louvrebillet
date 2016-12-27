@@ -110,7 +110,7 @@ class TicketController extends Controller
                 $charge = \Stripe\Charge::create(
                     array(
                     "amount" => $amount, // Amount in cents
-                    "currency" => "usd",
+                    "currency" => "eur",
                     "source" => $token,
                     "description" => "Example charge"
                     )
