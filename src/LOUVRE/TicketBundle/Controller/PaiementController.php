@@ -1,6 +1,6 @@
 <?php
 
-// src/LOUVRE/TicketBundle/Controller/TicketController.php
+// src/LOUVRE/TicketBundle/Controller/PaiementController.php
 
 namespace LOUVRE\TicketBundle\Controller;
 
@@ -12,50 +12,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Doctrine\ORM\QueryBuilder;
 
 
-class TicketController extends Controller
+class PaiementController extends Controller
 {
-    public function reservationAction(Request $request)
-    {
-    
-        
-        $billet= new Billet();
-        $billet->setDatedevisite(new \Datetime('now', new \DateTimeZone('Europe/Paris')));//prérempli le champs date de visite avec la date d'aujourd'hui
-      
-        $form = $this->get('form.factory')->create(BilletType::class, $billet);
-        
-        
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) { 
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($billet);
-            $em->flush();
-              
-            return $this->redirectToRoute('louvre_ticket_commandepage', array('id'=>$billet->getId()));
-                        
-        }
-        
-        return $this->render(
-            'LOUVRETicketBundle:Ticket:form.html.twig', [
-            'form' => $form->createView(),
-            ]
-        );
-    }
-
-    public function commandeAction($id,Request $request)
+	public function commandeAction($id,Request $request)
     {
 
         $amount= 0;
@@ -131,9 +92,4 @@ class TicketController extends Controller
         );
     }
 
-    public function achatAction()
-    {
-        return $this->render('LOUVRETicketBundle:Ticket:index.html.twig');
-    }
-    
 }
