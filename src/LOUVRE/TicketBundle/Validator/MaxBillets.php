@@ -10,13 +10,10 @@ use Symfony\Component\Validator\Constraint;
  */
 class MaxBillets extends Constraint
 {
-    
-    public $messageMaxBillets = "Vous ne pouvez plus commander, le musée est complet pour cette date";
+	public $messageMaxBillets = "Vous ne pouvez plus commander, le musée est complet pour cette date";
 
-    public function validatedBy()
-  {
-    return 'louvre_ticket_maxbillet'; // Ici, on fait appel à l'alias du service
-  }
-    
-    
+	public function validatedBy()
+	{
+		return 'louvre_ticket_maxbillet'; // Ici, on fait appel à l'alias du service
+	}
 }

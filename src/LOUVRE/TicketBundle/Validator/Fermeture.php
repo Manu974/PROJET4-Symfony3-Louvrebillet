@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraint;
  */
 class Fermeture extends Constraint
 {
-    
-    public $messageJourFeries = "le musée est fermé les jours fériés";
-    public $messageDimanches = "le musée est fermé les Dimanches";
-    public $messageMardis = "le musée est fermé les Mardis";
-    
+
+	public $messageJourFeries = "le musée est fermé les jours fériés";
+	public $messageDimanches = "le musée est fermé les Dimanches";
+	public $messageMardis = "le musée est fermé les Mardis";
+
 }

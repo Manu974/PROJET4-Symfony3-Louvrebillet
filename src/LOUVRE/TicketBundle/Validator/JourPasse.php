@@ -10,5 +10,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class JourPasse extends Constraint
 {
-  public $message = "Vous ne pouvez pas commander pour les jours passés ";
+	public $message = "Vous ne pouvez pas commander pour les jours passés ";
 }

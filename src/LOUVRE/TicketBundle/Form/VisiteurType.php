@@ -20,39 +20,39 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 class VisiteurType extends AbstractType
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('pays', ChoiceType::class, array(
+        ->add('nom', TextType::class)
+        ->add('prenom', TextType::class)
+        ->add('pays', ChoiceType::class, array(
             'choices' =>array(
                 'France' => 'France',
                 'Espagne' => 'Espagne',
                 'Allemagne' => 'Allemagne',
                 'Brésil' => 'Brésil',
                 'Portugal' => 'Portugal',
-                ),
-            ))
-            ->add('datedenaissance', BirthdayType::class, array(
-    'placeholder' => array(
-        'Année' => 'Année', 'Mois' => 'Mois', 'Jour' => 'Jour',
-    )
-))
-            ->add('tarifreduit', CheckboxType::class, array(
-    'label'    => 'Tarif Réduit ?',
-    'required' => false,
-))
-            
-            ->add('email', EmailType::class);
-                   
+            ),
+        ))
+        ->add('datedenaissance', BirthdayType::class, array(
+            'placeholder' => array(
+                'Année' => 'Année', 'Mois' => 'Mois', 'Jour' => 'Jour',
+            )
+        ))
+        ->add('tarifreduit', CheckboxType::class, array(
+            'label'    => 'Tarif Réduit ?',
+            'required' => false,
+        ))
+
+        ->add('email', EmailType::class);
+
     }
-    
+
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -61,8 +61,8 @@ class VisiteurType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function getBlockPrefix()
     {
         return 'louvre_ticketbundle_visiteur';

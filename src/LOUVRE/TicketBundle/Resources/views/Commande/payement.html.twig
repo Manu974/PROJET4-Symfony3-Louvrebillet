@@ -5,17 +5,44 @@
 {% block title %}{{ parent() }}- commande du billet{% endblock %}
 
 {% block body %}
-  <form action="/your-server-side-code" method="POST">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_wFGmbh7iijSho5QbTs2okfSR"
-    data-amount="999"
-    data-name="Demo Site"
-    data-description="Widget"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto">
-  </script>
-</form>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<button id="customButton">Purchase</button>
+
+ 
+
+<script>
+var handler = StripeCheckout.configure({
+  key: 'pk_test_wFGmbh7iijSho5QbTs2okfSR',
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  token: function(token) {
+    $.post('',{ token: token.id, mail: token.email},function(){
+
+      window.location.replace("http://localhost/SymfonyP3/web/app_dev.php/achat");
+    });
+  }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Musée du Louvre',
+    description: 'entrez vos informations bancaires',
+    amount: {{amount}},
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+
+  handler.close();
+  
+});
+</script>
+
+
 {% endblock %}
 
 

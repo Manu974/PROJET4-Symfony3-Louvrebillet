@@ -5,5 +5,11 @@
 {% block title %}{{ parent() }}- commande du billet{% endblock %}
 
 {% block body %}
-  Notre plateforme est un peu vide pour le moment, mais cela viendra !
+  <div class="well">
+      {# On affiche tous les messages flash dont le nom est « info » #}
+      {% for message in app.session.flashbag.get('notice') %}
+        <p>Message flash : {{ message }}</p>
+      {% endfor %}
+    </div>
+
 {% endblock %}
