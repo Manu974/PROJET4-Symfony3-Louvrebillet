@@ -11,16 +11,16 @@ namespace LOUVRE\TicketBundle\Repository;
 class VisiteurRepository extends \Doctrine\ORM\EntityRepository
 {
 
-	public function countVisitorsFor($datedevisite)
-	{
-		return (int) $this->createQueryBuilder('visiteurs')
-			->leftJoin('visiteurs.billet', 'billet')
-			->select('COUNT(visiteurs.id)')
-			->where('billet.datedevisite= :datedevisite')
-			->setParameter('datedevisite', $datedevisite)
-			->getQuery()
-			->getSingleScalarResult();
-	}
+    public function countVisitorsFor($datedevisite)
+    {
+        return (int) $this->createQueryBuilder('visiteurs')
+            ->leftJoin('visiteurs.billet', 'billet')
+            ->select('COUNT(visiteurs.id)')
+            ->where('billet.datedevisite= :datedevisite')
+            ->setParameter('datedevisite', $datedevisite)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
-	
+    
 }

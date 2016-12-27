@@ -48,7 +48,6 @@ class Visiteur
      * @var \DateTime
      *
      * @ORM\Column(name="datedenaissance", type="date")
-     * 
      */
     private $datedenaissance;
 

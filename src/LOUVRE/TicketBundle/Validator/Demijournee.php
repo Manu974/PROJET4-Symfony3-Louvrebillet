@@ -11,6 +11,6 @@ use Symfony\Component\Validator\Constraint;
 class Demijournee extends Constraint
 {
 
-	public $messageBilletDemiJournee = "Vous ne pouvez plus commander de billet 'Journée' après 14h00";
+    public $messageBilletDemiJournee = "Vous ne pouvez plus commander de billet 'Journée' après 14h00";
 
 }

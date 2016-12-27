@@ -10,5 +10,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class SansVisiteur extends Constraint
 {
-	public $messageSansVisiteur = "il doit y avoir au moins un visiteur pour le billet";
+    public $messageSansVisiteur = "il doit y avoir au moins un visiteur pour le billet";
 }

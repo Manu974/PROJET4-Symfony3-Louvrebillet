@@ -25,28 +25,34 @@ class VisiteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('nom', TextType::class)
-        ->add('prenom', TextType::class)
-        ->add('pays', ChoiceType::class, array(
-            'choices' =>array(
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+            ->add(
+                'pays', ChoiceType::class, array(
+                'choices' =>array(
                 'France' => 'France',
                 'Espagne' => 'Espagne',
                 'Allemagne' => 'Allemagne',
                 'Brésil' => 'Brésil',
                 'Portugal' => 'Portugal',
-            ),
-        ))
-        ->add('datedenaissance', BirthdayType::class, array(
-            'placeholder' => array(
-                'Année' => 'Année', 'Mois' => 'Mois', 'Jour' => 'Jour',
+                ),
+                )
             )
-        ))
-        ->add('tarifreduit', CheckboxType::class, array(
-            'label'    => 'Tarif Réduit ?',
-            'required' => false,
-        ))
+            ->add(
+                'datedenaissance', BirthdayType::class, array(
+                'placeholder' => array(
+                'Année' => 'Année', 'Mois' => 'Mois', 'Jour' => 'Jour',
+                )
+                )
+            )
+            ->add(
+                'tarifreduit', CheckboxType::class, array(
+                'label'    => 'Tarif Réduit ?',
+                'required' => false,
+                )
+            )
 
-        ->add('email', EmailType::class);
+            ->add('email', EmailType::class);
 
     }
 
@@ -55,9 +61,11 @@ class VisiteurType extends AbstractType
     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'LOUVRE\TicketBundle\Entity\Visiteur'
-        ));
+            )
+        );
     }
 
     /**

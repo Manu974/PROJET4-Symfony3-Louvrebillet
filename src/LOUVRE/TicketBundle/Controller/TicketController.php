@@ -48,9 +48,11 @@ class TicketController extends Controller
                         
         }
         
-        return $this->render('LOUVRETicketBundle:Ticket:form.html.twig', [
+        return $this->render(
+            'LOUVRETicketBundle:Ticket:form.html.twig', [
             'form' => $form->createView(),
-        ]);
+            ]
+        );
     }
 
     public function commandeAction($id,Request $request)
@@ -61,10 +63,9 @@ class TicketController extends Controller
         
         
         $repository = $this
-        ->getDoctrine()
-        ->getManager()
-        ->getRepository('LOUVRETicketBundle:Billet')
-      ;
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LOUVRETicketBundle:Billet');
 
         $billet= $repository->find($id);
         //$NombreVisiteurs=$billet->getVisiteurs();
@@ -76,8 +77,7 @@ class TicketController extends Controller
         
             $ageVisiteur= (int) $dateDeNaissance->diff($today)->format('%y');
           
-            if($ageVisiteur>4 && $ageVisiteur<=12)
-            {
+            if($ageVisiteur>4 && $ageVisiteur<=12) {
                 $amount+=800;
             }
             else if ($ageVisiteur>12 && $ageVisiteur<60) {
@@ -100,32 +100,35 @@ class TicketController extends Controller
         }
 
         
-        if ($request->isMethod('POST'))
-        {
+        if ($request->isMethod('POST')) {
             \Stripe\Stripe::setApiKey("sk_test_H1AamoySDGAPi7KD6CviYFXp");
 
             // Get the credit card details submitted by the form
             $token = $_POST['token'];
             // Create a charge: this will charge the user's card
             try {
-                $charge = \Stripe\Charge::create(array(
-                "amount" => $amount, // Amount in cents
-                "currency" => "usd",
-                "source" => $token,
-                "description" => "Example charge"
-                ));
+                $charge = \Stripe\Charge::create(
+                    array(
+                    "amount" => $amount, // Amount in cents
+                    "currency" => "usd",
+                    "source" => $token,
+                    "description" => "Example charge"
+                    )
+                );
 
             } catch(\Stripe\Error\Card $e) {
-            // The card has been declined
+                // The card has been declined
             }
 
             $request->getSession()->getFlashBag()->add('notice', 'Paypement effetué');
         }
 
             
-        return $this->render('LOUVRETicketBundle:Commande:payement.html.twig',[
+        return $this->render(
+            'LOUVRETicketBundle:Commande:payement.html.twig', [
             'amount' => $amount,
-        ]);
+            ]
+        );
     }
 
     public function achatAction()

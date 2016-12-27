@@ -8,13 +8,13 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class JourPasseValidator extends ConstraintValidator
 {
-	public function validate($value, Constraint $constraint)
-	{
-		$todayMidnight = strtotime('today midnight');
-		$valeurJourVisite = $value->getTimestamp();
+    public function validate($value, Constraint $constraint)
+    {
+        $todayMidnight = strtotime('today midnight');
+        $valeurJourVisite = $value->getTimestamp();
 
-		if($valeurJourVisite < $todayMidnight) {
-			$this->context->addViolation($constraint->message);        
-		}  
-	}
+        if($valeurJourVisite < $todayMidnight) {
+            $this->context->addViolation($constraint->message);        
+        }  
+    }
 }

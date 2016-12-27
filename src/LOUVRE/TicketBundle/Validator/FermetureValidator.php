@@ -13,18 +13,15 @@ class FermetureValidator extends ConstraintValidator
     
         $currentDate=$value->getTimestamp();
         
-         if($this->isFerie($currentDate))
-        {
-             $this->context->addViolation($constraint->messageJourFeries);
+        if($this->isFerie($currentDate)) {
+            $this->context->addViolation($constraint->messageJourFeries);
         }
 
-        if($this->isSunday($currentDate))
-        {
+        if($this->isSunday($currentDate)) {
             $this->context->addViolation($constraint->messageDimanches);
         }
 
-        if($this->isTuesday($currentDate))
-        {
+        if($this->isTuesday($currentDate)) {
             $this->context->addViolation($constraint->messageMardis);
         }
         
@@ -72,9 +69,11 @@ class FermetureValidator extends ConstraintValidator
         /*
         * On est oblige de convertir les timestamps en string a cause des decalages horaires.
         */
-        $aHolidaysString = array_map(function ($value) {
-            return strftime('%Y-%m-%d', $value);
-        }, $aHolidays);
+        $aHolidaysString = array_map(
+            function ($value) {
+                return strftime('%Y-%m-%d', $value);
+            }, $aHolidays
+        );
 
         return in_array(strftime('%Y-%m-%d', $timestamp), $aHolidaysString);
     }

@@ -28,19 +28,23 @@ class BilletType extends AbstractType
     {
         $builder
             ->add('datedevisite', DateType::class)
-            ->add('journeecomplete', ChoiceType::class, [          
+            ->add(
+                'journeecomplete', ChoiceType::class, [          
                 'choices' => [
                     'Journée' => 'Journée',
                     'Demi-journée' => 'Demi-journée',
                 ],
-            ])
+                ]
+            )
             
-            ->add('visiteurs', CollectionType::class, [
+            ->add(
+                'visiteurs', CollectionType::class, [
                 'entry_type' => VisiteurType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ])
+                ]
+            )
             ->add('valider',   SubmitType::class);
            
     }
@@ -50,9 +54,11 @@ class BilletType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'LOUVRE\TicketBundle\Entity\Billet'
-        ));
+            )
+        );
     }
 
     /**
