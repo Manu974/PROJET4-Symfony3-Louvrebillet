@@ -48,7 +48,8 @@ class PaiementController extends Controller
                 // The card has been declined
             }
 
-            $request->getSession()->getFlashBag()->add('notice', 'Paypement effetué');
+        $request->getSession()->getFlashBag()->add('notice', 'Paypement effetué, vous recevrez dans quelqueminutes un mail de confirmation!');
+            //return $this->render('LOUVRETicketBundle:Ticket:index.html.twig');
         }
 
             
