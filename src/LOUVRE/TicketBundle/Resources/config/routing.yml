@@ -1,6 +1,6 @@
 louvre_ticket_achatpage:
-    path:    /achat
-    defaults: { _controller: LOUVRETicketBundle:Reservation:achat }
+    path:    /finalisation
+    defaults: { _controller: LOUVRETicketBundle:Finalisation:mail }
     
 louvre_ticket_commandepage:
     path:    /commande/{id}

@@ -54,11 +54,4 @@ class ReservationController extends Controller
             ]
         );
     }
-
-
-    public function achatAction()
-    {
-        return $this->render('LOUVRETicketBundle:Ticket:index.html.twig');
-    }
-    
 }
