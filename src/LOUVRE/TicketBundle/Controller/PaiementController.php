@@ -19,47 +19,14 @@ class PaiementController extends Controller
 	public function commandeAction($id,Request $request)
     {
 
-        $amount= 0;
-        $today= new \Datetime('now', new \DateTimeZone('Europe/Paris'));
-        
-        
         $repository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('LOUVRETicketBundle:Billet');
 
         $billet= $repository->find($id);
-        //$NombreVisiteurs=$billet->getVisiteurs();
         
-
-        foreach ($billet->getVisiteurs() as $visiteur) {
-            $dateDeNaissance=$visiteur->getDatedenaissance();
-            $tarifReduit=$visiteur->getTarifreduit();
-        
-            $ageVisiteur= (int) $dateDeNaissance->diff($today)->format('%y');
-          
-            if($ageVisiteur>4 && $ageVisiteur<=12) {
-                $amount+=800;
-            }
-            else if ($ageVisiteur>12 && $ageVisiteur<60) {
-                $amount+=1600;
-            }
-
-            else if ($ageVisiteur>60) {
-                $amount+=1200;
-            }
-
-            else if ($ageVisiteur<4) {
-
-                $amount+=0;
-            }
-
-            else if ($tarifReduit && $ageVisiteur>17) {
-
-                $amount+=1000;
-            }          
-        }
-
+        $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
         
         if ($request->isMethod('POST')) {
             \Stripe\Stripe::setApiKey("sk_test_H1AamoySDGAPi7KD6CviYFXp");
@@ -70,7 +37,7 @@ class PaiementController extends Controller
             try {
                 $charge = \Stripe\Charge::create(
                     array(
-                    "amount" => $amount, // Amount in cents
+                    "amount" => $prixBillet, // Amount in cents
                     "currency" => "eur",
                     "source" => $token,
                     "description" => "Example charge"
@@ -87,7 +54,7 @@ class PaiementController extends Controller
             
         return $this->render(
             'LOUVRETicketBundle:Commande:payement.html.twig', [
-            'amount' => $amount,
+            'amount' => $prixBillet,
             ]
         );
     }

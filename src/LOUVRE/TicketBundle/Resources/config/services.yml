@@ -5,6 +5,5 @@ services:
             tags:
                 - { name: validator.constraint_validator, alias: louvre_ticket_maxbillet }  # C'est avec l'alias qu'on retrouvera le service
 
-#    louvre_ticket.example:
-#        class: LOUVRE\TicketBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    louvre_ticket.prixbillet:
+            class: LOUVRE\TicketBundle\CalculPrix\PrixBillet
