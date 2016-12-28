@@ -19,7 +19,10 @@ var handler = StripeCheckout.configure({
   token: function(token) {
     $.post('',{ token: token.id, mail: token.email},function(){
 
-      window.location.replace("http://localhost/SymfonyP3/web/app_dev.php/finalisation");
+      var url="http://localhost/SymfonyP3/web/app_dev.php/finalisation/"+{{id}};
+      
+      window.location.replace(url);
+      
     });
   }
 });

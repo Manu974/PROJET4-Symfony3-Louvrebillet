@@ -53,5 +53,5 @@ class ReservationController extends Controller
             'form' => $form->createView(),
             ]
         );
-    }
+    }  
 }
