@@ -49,6 +49,7 @@ class PaiementController extends Controller
             }
 
         $request->getSession()->getFlashBag()->add('notice', 'Paypement effetué, vous recevrez dans quelqueminutes un mail de confirmation!');
+
         }
 
             

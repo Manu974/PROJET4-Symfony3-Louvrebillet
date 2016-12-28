@@ -44,7 +44,9 @@ class ReservationController extends Controller
             $em->persist($billet);
             $em->flush();
               
-            return $this->redirectToRoute('louvre_ticket_commandepage', array('id'=>$billet->getId()));
+            return $this->redirectToRoute('louvre_ticket_commandepage', [
+                'id'=>$billet->getId(),
+                ]);
                         
         }
         

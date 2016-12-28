@@ -29,6 +29,7 @@ class FinalisationController extends Controller
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
         
+        
 
         $message = \Swift_Message::newInstance()
         ->setSubject('Confirmation de reservation')

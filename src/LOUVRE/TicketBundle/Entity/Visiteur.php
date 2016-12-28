@@ -58,12 +58,7 @@ class Visiteur
      */
     private $tarifreduit;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
+    
     
     /**
     * @ORM\ManytoOne(targetEntity="LOUVRE\TicketBundle\Entity\Billet", inversedBy="visiteurs")
@@ -211,30 +206,6 @@ class Visiteur
     public function getTarifreduit()
     {
         return $this->tarifreduit;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Visiteur
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**

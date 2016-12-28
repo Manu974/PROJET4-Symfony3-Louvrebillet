@@ -50,9 +50,9 @@ class VisiteurType extends AbstractType
                 'label'    => 'Tarif Réduit ?',
                 'required' => false,
                 )
-            )
+            );
 
-            ->add('email', EmailType::class);
+            
 
     }
 

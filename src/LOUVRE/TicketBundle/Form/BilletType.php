@@ -36,6 +36,7 @@ class BilletType extends AbstractType
                 ],
                 ]
             )
+            ->add('email', EmailType::class)
             
             ->add(
                 'visiteurs', CollectionType::class, [
