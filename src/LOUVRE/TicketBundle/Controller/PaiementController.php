@@ -29,7 +29,7 @@ class PaiementController extends Controller
         $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
         
         if ($request->isMethod('POST')) {
-            \Stripe\Stripe::setApiKey("sk_test_H1AamoySDGAPi7KD6CviYFXp");
+            \Stripe\Stripe::setApiKey($this->getParameter('cleSecretStripe'));
 
             // Get the credit card details submitted by the form
             $token = $_POST['token'];
@@ -57,6 +57,7 @@ class PaiementController extends Controller
             'amount' => $prixBillet,
             'id'=> $id,
             'email'=> $billet->getEmail(),
+            'clestripe'=> $this->getParameter('clePublicStripe'),
             ]
         );
     }
