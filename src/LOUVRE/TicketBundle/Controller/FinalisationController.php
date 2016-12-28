@@ -24,6 +24,7 @@ class FinalisationController extends Controller
             ->getRepository('LOUVRETicketBundle:Billet');
 
         $billet= $repository->find($id);
+        $email=$billet->getEmail();
 
         $listVisiteurs= $billet->getVisiteurs();
         $dateDeResevartion= $billet->getDatedevisite();
@@ -34,7 +35,7 @@ class FinalisationController extends Controller
         $message = \Swift_Message::newInstance()
         ->setSubject('Confirmation de reservation')
         ->setFrom('emmanuel.dijoux16@gmail.com')
-        ->setTo('emmanuel.dijoux14@gmail.com')
+        ->setTo($email)
         ->setBody(
             $this->renderView(
                 // app/Resources/views/Emails/registration.html.twig
