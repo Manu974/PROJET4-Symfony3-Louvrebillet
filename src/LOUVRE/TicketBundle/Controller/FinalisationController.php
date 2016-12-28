@@ -26,6 +26,9 @@ class FinalisationController extends Controller
         $billet= $repository->find($id);
 
         $listVisiteurs= $billet->getVisiteurs();
+        $dateDeResevartion= $billet->getDatedevisite();
+        $prixdubillet=$this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
+        
 
         $message = \Swift_Message::newInstance()
         ->setSubject('Confirmation de reservation')
@@ -36,6 +39,8 @@ class FinalisationController extends Controller
                 // app/Resources/views/Emails/registration.html.twig
                 'LOUVRETicketBundle:Emails:confirmationReservation.html.twig',[
                 'listVisiteurs'=>$listVisiteurs,
+                'dateDeResevartion'=> $dateDeResevartion->format('d-m-Y'),
+                'tarif'=>$prixdubillet/100,
 
                 ]
                 

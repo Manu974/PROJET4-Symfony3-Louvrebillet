@@ -1,6 +1,9 @@
 {# src/LOUVRE/TicketBundle/Resources/views/Emails/confirmationReservation.html.twig #}
-<h1>Merci pour votre reservation chez nous</h1>
+<h1>Musée du louvre</h1>
 
+<p>Bonjour, vous avez reservé un billet pour la date du: {{dateDeResevartion}}, pour un montant de {{tarif}}€</p>
+
+<p>Pour les visiteurs suivant</p>
 <ul>
   {% for visiteur in listVisiteurs %}
   	<li>Visiteur N°{{loop.index}}</li>
