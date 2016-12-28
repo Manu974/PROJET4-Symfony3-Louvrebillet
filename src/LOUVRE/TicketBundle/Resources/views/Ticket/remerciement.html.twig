@@ -1,17 +1,15 @@
-{# src/Louvre/TicketBundle/Resources/views/Ticket/index.html.twig #}
+{# src/Louvre/TicketBundle/Resources/views/Ticket/remerciement.html.twig #}
 
 {% extends "LOUVRETicketBundle::layout.html.twig" %}
 
 {% block title %}{{ parent() }}- commande du billet{% endblock %}
 
 {% block body %}
-  <div class="well">
+  <div class="alert alert-info">
       {# On affiche tous les messages flash dont le nom est « info » #}
       {% for message in app.session.flashbag.get('notice') %}
-        <p>Message flash : {{ message }}</p>
+        <p>{{ message }}</p>
       {% endfor %}
     </div>
-
-
 
 {% endblock %}

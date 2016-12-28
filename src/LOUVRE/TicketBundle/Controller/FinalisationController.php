@@ -52,8 +52,9 @@ class FinalisationController extends Controller
         
         $this->get('mailer')->send($message);
 
-    	
-        return $this->render('LOUVRETicketBundle:Ticket:index.html.twig');
+
+    	return $this->redirectToRoute('louvre_ticket_remerciementpage');
+        
     }
 }
 

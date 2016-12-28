@@ -9,5 +9,9 @@ louvre_ticket_commandepage:
 louvre_ticket_reservationpage:
     path:    /reservation
     defaults: { _controller: LOUVRETicketBundle:Reservation:reservation }
+
+louvre_ticket_remerciementpage:
+    path:    /thanks
+    defaults: { _controller: LOUVRETicketBundle:Remerciement:thanks }
     
     
