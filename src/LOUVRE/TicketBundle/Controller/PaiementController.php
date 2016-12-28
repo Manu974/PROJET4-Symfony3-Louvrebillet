@@ -25,6 +25,7 @@ class PaiementController extends Controller
             ->getRepository('LOUVRETicketBundle:Billet');
 
         $billet= $repository->find($id);
+
     
         $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
         
@@ -48,7 +49,7 @@ class PaiementController extends Controller
                 // The card has been declined
             }
 
-        $request->getSession()->getFlashBag()->add('notice', 'Paypement effetué, vous recevrez dans quelqueminutes un mail de confirmation!');
+        $request->getSession()->getFlashBag()->add('notice', 'Paiement effetué, vous recevrez dans quelques minutes un mail de confirmation à imprimer en guise de billet!');
 
         }
  
@@ -58,6 +59,9 @@ class PaiementController extends Controller
             'id'=> $id,
             'email'=> $billet->getEmail(),
             'clestripe'=> $this->getParameter('clePublicStripe'),
+            'listVisiteurs'=> $billet->getVisiteurs(),
+            'datedereservation'=> $billet->getDatedevisite()->format('d-m-Y'),
+            'typedebillet'=>$billet->getJourneecomplete(),
             ]
         );
     }

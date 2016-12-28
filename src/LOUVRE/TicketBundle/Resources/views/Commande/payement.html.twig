@@ -6,10 +6,8 @@
 
 {% block body %}
 <script src="https://checkout.stripe.com/checkout.js"></script>
-
-<button id="customButton">Purchase</button>
-
- 
+{{ include("LOUVRETicketBundle:Commande:recapitulatif.html.twig") }}
+<button id="customButton" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Payer</button>
 
 <script>
 var handler = StripeCheckout.configure({
@@ -48,8 +46,6 @@ window.addEventListener('popstate', function() {
   
 });
 </script>
-
-
 {% endblock %}
 
 

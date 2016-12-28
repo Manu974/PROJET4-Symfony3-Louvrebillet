@@ -1,0 +1,37 @@
+{# src/Louvre/TicketBundle/Resources/views/Commande/recapitulatif.html.twig #}
+
+<h3>Récapitulatif de votre commande</h3>
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h4 class="panel-title"> Reservation pour le {{datedereservation}} pour la {{typedebillet}} </h4>
+	</div>
+
+	<div class="panel-body">
+		<h4>Nombre de visiteurs</h4>
+		<ul class="list-group">
+			{% for visiteur in listVisiteurs %}
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4 class="panel-title">Visiteur N°{{loop.index}}</h4>
+				</div>
+				<div class="panel-body">
+					<p>{{visiteur.nom}} {{ visiteur.prenom }} né(e) le {{visiteur.datedenaissance|date('d/m/Y')}} résident en {{visiteur.pays}} </p>
+				</div>
+			</div>
+			{% endfor %}
+		</ul>
+
+		<h3 class="alert alert-success"> PRIX DE LA RESERVATION : {{amount/100}} € </h3>
+
+	</div>
+</div>
+	
+
+	
+
+
+
+  
+  
