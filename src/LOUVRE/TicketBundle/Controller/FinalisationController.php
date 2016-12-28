@@ -29,6 +29,7 @@ class FinalisationController extends Controller
         $listVisiteurs= $billet->getVisiteurs();
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
+        $codereservation=$this->container->get('louvre_ticket.codereservation')->codeReservation();
         
         
 
@@ -43,6 +44,7 @@ class FinalisationController extends Controller
                 'listVisiteurs'=>$listVisiteurs,
                 'dateDeResevartion'=> $dateDeResevartion->format('d-m-Y'),
                 'tarif'=>$prixdubillet/100,
+                'codeReservation'=>$codereservation,
 
                 ]
                 
