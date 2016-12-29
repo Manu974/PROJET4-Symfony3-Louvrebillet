@@ -33,8 +33,10 @@ class FinalisationController extends Controller
         
         
 
-        $message = \Swift_Message::newInstance()
-        ->setSubject('Confirmation de reservation')
+        $message = \Swift_Message::newInstance();
+        $logoLouvre= $message->embed(\Swift_Image::fromPath('../web/images/logo_louvre.png'));
+        
+        $message->setSubject('Confirmation de reservation')
         ->setFrom('emmanuel.dijoux16@gmail.com')
         ->setTo($email)
         ->setBody(
@@ -45,12 +47,15 @@ class FinalisationController extends Controller
                 'dateDeResevartion'=> $dateDeResevartion->format('d-m-Y'),
                 'tarif'=>$prixdubillet/100,
                 'codeReservation'=>$codereservation,
+                'urlImage'=>$logoLouvre,
 
                 ]
                 
             ),
             'text/html'
+
         );
+        
         
         $this->get('mailer')->send($message);
 

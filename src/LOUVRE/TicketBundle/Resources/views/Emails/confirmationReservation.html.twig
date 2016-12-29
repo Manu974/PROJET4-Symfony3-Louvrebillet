@@ -1,5 +1,6 @@
 {# src/LOUVRE/TicketBundle/Resources/views/Emails/confirmationReservation.html.twig #}
 <h1>Musée du louvre</h1>
+<img src="{{urlImage}}">
 
 <p>Bonjour, vous avez reservé un billet pour la date du: {{dateDeResevartion}}, pour un montant de {{tarif}}€</p>
 
@@ -9,9 +10,12 @@
   	<li>Visiteur N°{{loop.index}}</li>
     <span>{{ visiteur.nom }}</span>
     <span>{{ visiteur.prenom }}</span>
+    </br>
+
   {% endfor %}
 </ul>
 
 <p>Code de la réservation : {{codeReservation}}</p>
 
 <span>Cordialement Musée du LOUVRE</span>
+
