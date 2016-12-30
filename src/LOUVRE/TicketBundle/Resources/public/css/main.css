@@ -1,7 +1,7 @@
 .checkbox + .tooltip > .tooltip-inner {
-      background-color: #73AD21; 
+      background-color: #D9534F; 
       color: #FFFFFF; 
-      border: 1px solid green; 
-      padding: 15px;
-      font-size: 20px;
+      border: 2px solid black; 
+      padding: 5px;
+      font-size: 15px;
   }
