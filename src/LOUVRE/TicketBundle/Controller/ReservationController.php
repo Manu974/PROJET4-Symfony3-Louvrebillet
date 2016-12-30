@@ -55,5 +55,23 @@ class ReservationController extends Controller
             'form' => $form->createView(),
             ]
         );
-    }  
+    }
+
+    public function deleteAction($id,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $billet=  $em->getRepository('LOUVRETicketBundle:Billet')->find($id);
+
+        if (null === $billet) {
+             throw new NotFoundHttpException("La réservation d'id ".$id." n'existe pas.");
+        }
+
+        $em->remove($billet);
+        $em->flush();
+
+        return $this->redirectToRoute('louvre_ticket_reservationpage');
+
+    }
+  
 }

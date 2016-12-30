@@ -21,6 +21,5 @@ class VisiteurRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-
     
 }

@@ -7,7 +7,8 @@
 {% block body %}
 <script src="https://checkout.stripe.com/checkout.js"></script>
 {{ include("LOUVRETicketBundle:Commande:recapitulatif.html.twig") }}
-<button id="customButton" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Payer</button>
+<button id="payerButton" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Payer</button>
+<button id="supprimerButton" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Annuler la réservation</button>
 
 <script>
 var handler = StripeCheckout.configure({
@@ -25,7 +26,7 @@ var handler = StripeCheckout.configure({
   }
 });
 
-document.getElementById('customButton').addEventListener('click', function(e) {
+document.getElementById('payerButton').addEventListener('click', function(e) {
   // Open Checkout with further options:
   handler.open({
     name: 'Musée du Louvre',
@@ -37,6 +38,14 @@ document.getElementById('customButton').addEventListener('click', function(e) {
     
   });
   e.preventDefault();
+});
+
+document.getElementById('supprimerButton').addEventListener('click',function(){
+
+var url="http://localhost/SymfonyP3/web/app_dev.php/delete/"+{{id}};
+      
+      window.location.replace(url);    
+
 });
 
 // Close Checkout on page navigation:

@@ -59,7 +59,7 @@ class Billet
     
     
     /**
-     * @ORM\OneToMany(targetEntity="LOUVRE\TicketBundle\Entity\Visiteur",  mappedBy="billet", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="LOUVRE\TicketBundle\Entity\Visiteur",  mappedBy="billet", cascade={"all"})
      * 
      * @SansVisiteur()
      */

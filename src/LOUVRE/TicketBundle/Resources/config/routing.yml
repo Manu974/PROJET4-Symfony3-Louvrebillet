@@ -13,5 +13,9 @@ louvre_ticket_reservationpage:
 louvre_ticket_remerciementpage:
     path:    /thanks
     defaults: { _controller: LOUVRETicketBundle:Remerciement:thanks }
+
+louvre_ticket_annulerpage:
+    path:    /delete/{id}
+    defaults: { _controller: LOUVRETicketBundle:Reservation:delete }
     
     

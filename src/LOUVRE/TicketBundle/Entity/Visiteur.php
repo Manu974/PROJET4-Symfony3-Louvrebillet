@@ -62,7 +62,7 @@ class Visiteur
     
     /**
     * @ORM\ManytoOne(targetEntity="LOUVRE\TicketBundle\Entity\Billet", inversedBy="visiteurs")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
     */
     private $billet;
     
