@@ -26,30 +26,34 @@ class VisiteurType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
+            ->add('prenom', TextType::class , [
+                'label'=> 'Prénom',
+
+                ])
             ->add(
-                'pays', ChoiceType::class, array(
-                'choices' =>array(
+                'pays', ChoiceType::class,[
+                'choices' =>[
                 'France' => 'France',
                 'Espagne' => 'Espagne',
                 'Allemagne' => 'Allemagne',
                 'Brésil' => 'Brésil',
                 'Portugal' => 'Portugal',
-                ),
-                )
+                ],
+                ]
             )
             ->add(
-                'datedenaissance', BirthdayType::class, array(
-                'placeholder' => array(
+                'datedenaissance', BirthdayType::class, [
+                'label' => 'Date de naissance',
+                'placeholder' => [
                 'Année' => 'Année', 'Mois' => 'Mois', 'Jour' => 'Jour',
-                )
-                )
+                ],
+                ]
             )
             ->add(
-                'tarifreduit', CheckboxType::class, array(
+                'tarifreduit', CheckboxType::class, [
                 'label'    => 'Tarif Réduit ?',
                 'required' => false,
-                )
+                ]
             );
 
             

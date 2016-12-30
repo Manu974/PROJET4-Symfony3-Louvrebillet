@@ -27,19 +27,27 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('datedevisite', DateType::class)
+            ->add('datedevisite', DateType::class, [
+                'label'=> 'Date de votre visite',
+                ])
             ->add(
-                'journeecomplete', ChoiceType::class, [          
+                'journeecomplete', ChoiceType::class, [
+                'label' => 'Journée complète ou Demi-journée ?',          
                 'choices' => [
                     'Journée' => 'Journée',
                     'Demi-journée' => 'Demi-journée',
                 ],
                 ]
             )
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+
+                'label' =>'E-mail',
+
+                ])
             
             ->add(
                 'visiteurs', CollectionType::class, [
+                'label'=> ' Visiteurs',
                 'entry_type' => VisiteurType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
