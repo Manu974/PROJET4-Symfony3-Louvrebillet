@@ -29,7 +29,8 @@
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_visiteur').click(function(e) {
       addVisiteur($container);
-
+      var $tarifReduit = $('.checkbox');
+      messageTarifReduit($tarifReduit);
       e.preventDefault(); // évite qu'un # apparaisse dans l'URL
       return false;
     });
