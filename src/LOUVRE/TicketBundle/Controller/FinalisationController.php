@@ -34,7 +34,7 @@ class FinalisationController extends Controller
         
 
         $message = \Swift_Message::newInstance();
-        $logoLouvre= $message->embed(\Swift_Image::fromPath('../web/images/logo_louvre.png'));
+        $logoLouvre= $message->embed(\Swift_Image::fromPath('../web/bundles/louvreticket/images/logo_louvre.png'));
         
         $message->setSubject('Confirmation de reservation')
         ->setFrom('emmanuel.dijoux16@gmail.com')
