@@ -10,3 +10,6 @@ services:
 
     louvre_ticket.codereservation:
             class: LOUVRE\TicketBundle\GenerationCode\Generation
+
+    louvre_ticket.maildeconfirmation:
+            class: LOUVRE\TicketBundle\MailConfirmation\Mail

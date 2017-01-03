@@ -12,17 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
 
 
 
@@ -46,15 +36,13 @@ class ReservationController extends Controller
               
             return $this->redirectToRoute('louvre_ticket_commandepage', [
                 'id'=>$billet->getId(),
-                ]);
+            ]);
                         
         }
         
-        return $this->render(
-            'LOUVRETicketBundle:Ticket:form.html.twig', [
+        return $this->render('LOUVRETicketBundle:Ticket:form.html.twig', [
             'form' => $form->createView(),
-            ]
-        );
+        ]);
     }
 
     public function deleteAction($id,Request $request)
@@ -63,8 +51,8 @@ class ReservationController extends Controller
 
         $billet=  $em->getRepository('LOUVRETicketBundle:Billet')->find($id);
 
-        if (null === $billet) {
-             throw new NotFoundHttpException("La réservation d'id ".$id." n'existe pas.");
+        if (is_null($billet)) {
+             throw new NotFoundHttpException("La réservation d'id {$id} n'existe pas.");
         }
 
         $em->remove($billet);

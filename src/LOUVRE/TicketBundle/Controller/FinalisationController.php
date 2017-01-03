@@ -25,7 +25,6 @@ class FinalisationController extends Controller
 
         $billet= $repository->find($id);
         $email=$billet->getEmail();
-
         $listVisiteurs= $billet->getVisiteurs();
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
