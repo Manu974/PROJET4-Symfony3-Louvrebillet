@@ -10,6 +10,7 @@
   	<li>Visiteur N°{{loop.index}}</li>
     <span>{{ visiteur.nom }}</span>
     <span>{{ visiteur.prenom }}</span>
+    <span> Né(e) le {{ visiteur.datedenaissance|date('d/m/Y') }}</span>
     </br>
 
   {% endfor %}

@@ -47,7 +47,7 @@ class BilletType extends AbstractType
             
             ->add(
                 'visiteurs', CollectionType::class, [
-                'label'=> ' Visiteurs',
+                'label' =>' ',
                 'entry_type' => VisiteurType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

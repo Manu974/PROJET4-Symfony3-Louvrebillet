@@ -12,9 +12,8 @@
  <h3>Formulaire de reservation</h3>
 
 
-  <div class="alert alert-info">
+  <div class="well">
   {{ form(form) }}
-    <a href="#" id="add_visiteur" class="btn btn-primary">Ajouter un Visiteur</a>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -22,33 +21,39 @@
   $(document).ready(function() {
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
     var $container = $('div#louvre_ticketbundle_billet_visiteurs');
+    $container.addClass('alert alert-info');
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
     var index = $container.find(':input').length;
+    creationBouttonAjouterVisiteur();
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_visiteur').click(function(e) {
       addVisiteur($container);
+      $("label:contains('Visiteur n°')").css( "font-size", "16px" );
       var $tarifReduit = $('.checkbox');
       messageTarifReduit($tarifReduit);
       e.preventDefault(); // évite qu'un # apparaisse dans l'URL
       return false;
     });
 
-    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un
     if (index == 0) {
       addVisiteur($container);
+      $("label:contains('Visiteur n°')").css( "font-size", "16px" );
       var $tarifReduit = $('.checkbox');
       messageTarifReduit($tarifReduit);
       
     } else {
-      // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+      
       $container.children('div').each(function() {
         addDeleteLink($(this));
       });
     }
 
-    // La fonction qui ajoute un formulaire CategoryType
+
+
+    // La fonction qui ajoute un formulaire
     function addVisiteur($container) {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
@@ -58,6 +63,7 @@
         .replace(/__name__/g,        index)
       ;
 
+      
       // On crée un objet jquery qui contient ce template
       var $prototype = $(template);
 
@@ -66,6 +72,7 @@
 
       // On ajoute le prototype modifié à la fin de la balise <div>
       $container.append($prototype);
+     
 
       // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
       index++;
@@ -93,6 +100,12 @@
       $checkbox.css('width','30%');
 
       $checkbox.tooltip({title:'Nécessaire de présenter sa carte étudiante, militaire ou équivalent lors de l\'entrée dans le musée', placement:'top', trigger:'focus'});
+    }
+
+    function creationBouttonAjouterVisiteur(){
+      var buttonVisiteur = $('<a href="#" id="add_visiteur" class="btn btn-primary">Ajouter un Visiteur</a>');
+      buttonVisiteur.insertBefore('#louvre_ticketbundle_billet_valider');
+     buttonVisiteur.after('<br/> <br/>');
     }
   });
 </script>
