@@ -18,45 +18,9 @@ class FinalisationController extends Controller
 {
 	public function mailAction($id,Request $request)
     {
-    	$repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('LOUVRETicketBundle:Billet');
+    	
 
-        $billet= $repository->find($id);
-        $email=$billet->getEmail();
-        $listVisiteurs= $billet->getVisiteurs();
-        $dateDeResevartion= $billet->getDatedevisite();
-        $prixdubillet=$this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
-        $codereservation=$this->container->get('louvre_ticket.codereservation')->codeReservation();
-        
-        
-
-        $message = \Swift_Message::newInstance();
-        $logoLouvre= $message->embed(\Swift_Image::fromPath('../web/bundles/louvreticket/images/logo_louvre.png'));
-        
-        $message->setSubject('Confirmation de reservation')
-        ->setFrom('emmanuel.dijoux16@gmail.com')
-        ->setTo($email)
-        ->setBody(
-            $this->renderView(
-                // app/Resources/views/Emails/registration.html.twig
-                'LOUVRETicketBundle:Emails:confirmationReservation.html.twig',[
-                'listVisiteurs'=>$listVisiteurs,
-                'dateDeResevartion'=> $dateDeResevartion->format('d-m-Y'),
-                'tarif'=>$prixdubillet/100,
-                'codeReservation'=>$codereservation,
-                'urlImage'=>$logoLouvre,
-
-                ]
-                
-            ),
-            'text/html'
-
-        );
-        
-        
-        $this->get('mailer')->send($message);
+        $this->container->get('louvre_ticket.maildeconfirmation')->envoi_mail_confirmation($id);
 
 
     	return $this->redirectToRoute('louvre_ticket_remerciementpage');
