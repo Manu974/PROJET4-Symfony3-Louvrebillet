@@ -42,12 +42,10 @@ class PrixBillet
                     $amount +=800;
                 }
 
-                else if ($ageVisiteur>=12 && $ageVisiteur<=17) {
-                    $amount+=1600;
-                }
-                else if ($ageVisiteur>17 && $ageVisiteur<60) {
+                else if ($ageVisiteur>=12 && $ageVisiteur<60) {
                     $amount+=1000;
                 }
+               
                 else if ($ageVisiteur>=60) {
                     $amount+=1000;
                 }
