@@ -67,4 +67,36 @@ class PrixBilletTest extends WebTestCase
 
         $this->assertEquals(0, $result);
     }
+
+    public function test_prix_tarif_reduit_normal()
+    {
+
+        $visiteur = new Visiteur();
+        $format = 'Y-m-d';
+		$date = \DateTime::createFromFormat($format, '1994-02-15');//à parir de 12ans
+        $visiteur->setDatedenaissance($date);
+        $visiteur->setTarifreduit(true);
+
+        $PrixBillet = new PrixBillet();
+
+        $result = $PrixBillet->prixTotal([$visiteur]);
+
+        $this->assertEquals(1000, $result);
+    }
+
+    public function test_prix_tarif_reduit_senior()
+    {
+
+        $visiteur = new Visiteur();
+        $format = 'Y-m-d';
+		$date = \DateTime::createFromFormat($format, '1954-02-15');//à parir de 12ans
+        $visiteur->setDatedenaissance($date);
+        $visiteur->setTarifreduit(true);
+
+        $PrixBillet = new PrixBillet();
+
+        $result = $PrixBillet->prixTotal([$visiteur]);
+
+        $this->assertEquals(1000, $result);
+    }
 }
