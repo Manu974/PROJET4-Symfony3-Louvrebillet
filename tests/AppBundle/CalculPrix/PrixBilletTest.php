@@ -99,4 +99,29 @@ class PrixBilletTest extends WebTestCase
 
         $this->assertEquals(1000, $result);
     }
+
+    public function test_deux_tarif_normal_et_un_senior()
+    {
+    	$format = 'Y-m-d';
+
+        $Bob = new Visiteur();
+        $Emmanuel= new Visiteur();
+        $Arnaud= new Visiteur();
+
+        $datedenaissanceBob = \DateTime::createFromFormat($format, '1954-02-15');
+		$Bob->setDatedenaissance($datedenaissanceBob);
+
+		$datedenaissanceEmmanuel = \DateTime::createFromFormat($format, '1994-02-15');
+		$Emmanuel->setDatedenaissance($datedenaissanceEmmanuel);
+
+		$datedenaissanceArnaud = \DateTime::createFromFormat($format, '1994-06-15');
+		$Arnaud->setDatedenaissance($datedenaissanceArnaud);
+     
+
+        $PrixBillet = new PrixBillet();
+
+        $result = $PrixBillet->prixTotal([$Bob, $Emmanuel, $Arnaud]);
+
+        $this->assertEquals(4400, $result);
+    }
 }
