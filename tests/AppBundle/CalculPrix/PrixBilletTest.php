@@ -124,4 +124,42 @@ class PrixBilletTest extends WebTestCase
 
         $this->assertEquals(4400, $result);
     }
+
+    public function test_un_senior_reduit_et_deux_normal_et_un_gratuit_et_un_enfant()
+    {
+    	$format = 'Y-m-d';
+
+        $Papy = new Visiteur();
+        $Emmanuel = new Visiteur();
+        $Jade = new Visiteur();
+        $Rachel = new Visiteur();
+        $Ethan= new Visiteur();
+
+        // tarif réduit pour un senior
+        $datedenaissancePapy = \DateTime::createFromFormat($format, '1954-02-15');
+		$Papy->setDatedenaissance($datedenaissancePapy);
+		$Papy->setTarifreduit(true);
+
+		//tarif normal à partir de 12 ans
+		$datedenaissanceEmmanuel = \DateTime::createFromFormat($format, '1994-10-24');
+		$Emmanuel->setDatedenaissance($datedenaissanceEmmanuel);
+
+		$datedenaissanceJade = \DateTime::createFromFormat($format, '1998-06-08');
+		$Jade->setDatedenaissance($datedenaissanceJade);
+
+		//tarif enfant
+		$datedenaissanceRachel = \DateTime::createFromFormat($format, '2010-06-15');
+		$Rachel->setDatedenaissance($datedenaissanceRachel);
+
+		//tarif gratuit
+		$datedenaissanceEthan = \DateTime::createFromFormat($format, '2015-06-15');
+		$Ethan->setDatedenaissance($datedenaissanceEthan);
+     
+
+        $PrixBillet = new PrixBillet();
+
+        $result = $PrixBillet->prixTotal([$Papy, $Emmanuel, $Jade, $Rachel, $Ethan]);
+
+        $this->assertEquals(5000, $result);
+    }
 }
