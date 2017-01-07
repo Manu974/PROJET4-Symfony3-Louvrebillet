@@ -16,14 +16,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FinalisationController extends Controller
 {
-	public function mailAction($id,Request $request)
+    public function mailAction($id,Request $request)
     {
-    	
+        
 
         $this->container->get('louvre_ticket.maildeconfirmation')->envoi_mail_confirmation($id);
 
 
-    	return $this->redirectToRoute('louvre_ticket_remerciementpage');
+        return $this->redirectToRoute('louvre_ticket_remerciementpage');
         
     }
 }

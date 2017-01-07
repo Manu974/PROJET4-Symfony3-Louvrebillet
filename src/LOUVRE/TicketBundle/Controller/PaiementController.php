@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaiementController extends Controller
 {
-	public function commandeAction($id,Request $request)
+    public function commandeAction($id,Request $request)
     {
 
         $repository = $this
@@ -49,7 +49,7 @@ class PaiementController extends Controller
                 // The card has been declined
             }
 
-        $request->getSession()->getFlashBag()->add('notice', 'Paiement effetué, vous recevrez dans quelques minutes un mail de confirmation à imprimer en guise de billet!');
+            $request->getSession()->getFlashBag()->add('notice', 'Paiement effetué, vous recevrez dans quelques minutes un mail de confirmation à imprimer en guise de billet!');
 
         }
  

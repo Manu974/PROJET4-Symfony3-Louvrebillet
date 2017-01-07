@@ -27,9 +27,11 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('datedevisite', DateType::class, [
+            ->add(
+                'datedevisite', DateType::class, [
                 'label'=> 'Date de votre visite',
-                ])
+                ]
+            )
             ->add(
                 'journeecomplete', ChoiceType::class, [
                 'label' => 'Journée complète ou Demi-journée ?',          
@@ -39,11 +41,13 @@ class BilletType extends AbstractType
                 ],
                 ]
             )
-            ->add('email', EmailType::class, [
+            ->add(
+                'email', EmailType::class, [
 
                 'label' =>'E-mail',
 
-                ])
+                ]
+            )
             
             ->add(
                 'visiteurs', CollectionType::class, [

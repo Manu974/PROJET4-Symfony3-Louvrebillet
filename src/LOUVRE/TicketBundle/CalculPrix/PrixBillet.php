@@ -14,7 +14,6 @@ class PrixBillet
             $dateDeNaissance=$visiteur->getDatedenaissance();
             $tarifReduit=$visiteur->getTarifreduit();
 
-
             $ageVisiteur= (int) $dateDeNaissance->diff($today)->format('%y');
 
             if(!$tarifReduit) {

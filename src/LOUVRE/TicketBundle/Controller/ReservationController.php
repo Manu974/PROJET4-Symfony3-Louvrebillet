@@ -35,15 +35,19 @@ class ReservationController extends Controller
                 $em->persist($billet);
                 $em->flush();
 
-                return $this->redirectToRoute('louvre_ticket_commandepage', [
-                'id'=>$billet->getId(),
-                ]);
+                return $this->redirectToRoute(
+                    'louvre_ticket_commandepage', [
+                    'id'=>$billet->getId(),
+                    ]
+                );
             }
         }
 
-        return $this->render('LOUVRETicketBundle:Ticket:form.html.twig', [
-        'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'LOUVRETicketBundle:Ticket:form.html.twig', [
+            'form' => $form->createView(),
+            ]
+        );
     }
 
     public function deleteAction($id,Request $request)

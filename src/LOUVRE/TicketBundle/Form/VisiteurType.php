@@ -26,12 +26,14 @@ class VisiteurType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class)
-            ->add('prenom', TextType::class , [
+            ->add(
+                'prenom', TextType::class, [
                 'label'=> 'Prénom',
 
-                ])
+                ]
+            )
             ->add(
-                'pays', ChoiceType::class,[
+                'pays', ChoiceType::class, [
                 'choices' =>[
                 'France' => 'France',
                 'Espagne' => 'Espagne',
