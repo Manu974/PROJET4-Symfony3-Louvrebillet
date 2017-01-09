@@ -73,7 +73,7 @@ class PrixBilletTest extends WebTestCase
 
         $visiteur = new Visiteur();
         $format = 'Y-m-d';
-		$date = \DateTime::createFromFormat($format, '1994-02-15');//à parir de 12ans
+		$date = \DateTime::createFromFormat($format, '1994-02-15');/**à parir de 12ans*/
         $visiteur->setDatedenaissance($date);
         $visiteur->setTarifreduit(true);
 
@@ -89,7 +89,7 @@ class PrixBilletTest extends WebTestCase
 
         $visiteur = new Visiteur();
         $format = 'Y-m-d';
-		$date = \DateTime::createFromFormat($format, '1954-02-15');//à parir de 12ans
+		$date = \DateTime::createFromFormat($format, '1954-02-15');/**à parir de 12ans*/
         $visiteur->setDatedenaissance($date);
         $visiteur->setTarifreduit(true);
 
@@ -135,23 +135,23 @@ class PrixBilletTest extends WebTestCase
         $Rachel = new Visiteur();
         $Ethan= new Visiteur();
 
-        // tarif réduit pour un senior
+        /** tarif réduit pour un senior*/
         $datedenaissancePapy = \DateTime::createFromFormat($format, '1954-02-15');
 		$Papy->setDatedenaissance($datedenaissancePapy);
 		$Papy->setTarifreduit(true);
 
-		//tarif normal à partir de 12 ans
+		/**tarif normal à partir de 12 ans*/
 		$datedenaissanceEmmanuel = \DateTime::createFromFormat($format, '1994-10-24');
 		$Emmanuel->setDatedenaissance($datedenaissanceEmmanuel);
 
 		$datedenaissanceJade = \DateTime::createFromFormat($format, '1998-06-08');
 		$Jade->setDatedenaissance($datedenaissanceJade);
 
-		//tarif enfant
+		/**tarif enfant*/
 		$datedenaissanceRachel = \DateTime::createFromFormat($format, '2010-06-15');
 		$Rachel->setDatedenaissance($datedenaissanceRachel);
 
-		//tarif gratuit
+		/**tarif gratuit*/
 		$datedenaissanceEthan = \DateTime::createFromFormat($format, '2015-06-15');
 		$Ethan->setDatedenaissance($datedenaissanceEthan);
      
