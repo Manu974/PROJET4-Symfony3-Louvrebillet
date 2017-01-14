@@ -23,10 +23,10 @@ class Mail
     public function envoi_mail_confirmation($code)
     {
         $billet= $this->database->findOneBy(['codereservation'=>$code]);
-        $email=$billet->getEmail();
         $listVisiteurs= $billet->getVisiteurs();
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->prixbillet->prixTotal($billet->getVisiteurs());
+        $email=$billet->getEmail();
         
         
         
@@ -45,6 +45,7 @@ class Mail
                     'tarif'=>$prixdubillet/100,
                     'codeReservation'=>$code,
                     'urlImage'=>$logoLouvre,
+                    
 
                     ]
                 ),

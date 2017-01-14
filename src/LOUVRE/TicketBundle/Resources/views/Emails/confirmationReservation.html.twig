@@ -11,8 +11,9 @@
     <span>{{ visiteur.nom }}</span>
     <span>{{ visiteur.prenom }}</span>
     <span> Né(e) le {{ visiteur.datedenaissance|date('d/m/Y') }}</span>
-    </br>
-
+    {% if visiteur.tarifreduit %}
+    <span> Avec un tarif réduit</span>
+	{% endif %}
   {% endfor %}
 </ul>
 

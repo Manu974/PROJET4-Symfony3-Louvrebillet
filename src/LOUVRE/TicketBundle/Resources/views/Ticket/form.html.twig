@@ -24,6 +24,7 @@
     var $container = $('div#louvre_ticketbundle_billet_visiteurs');
     $container.addClass('alert alert-info');
 
+
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
     var index = $container.find(':input').length;
     creationBouttonAjouterVisiteur();
@@ -67,6 +68,7 @@
       
       // On crée un objet jquery qui contient ce template
       var $prototype = $(template);
+      
 
       // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
       addDeleteLink($prototype);
