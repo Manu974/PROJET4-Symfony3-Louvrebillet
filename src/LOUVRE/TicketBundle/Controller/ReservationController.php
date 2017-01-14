@@ -18,46 +18,40 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller
 {
+   
     public function reservationAction(Request $request)
     {
 
         $billet= new Billet();
         $billet->setDatedevisite(new \Datetime('now', new \DateTimeZone('Europe/Paris')));//prérempli le champs date de visite avec la date d'aujourd'hui
-
+        $billet->setCodereservation($this->container->get('louvre_ticket.codereservation')->codeReservation());
         $form = $this->get('form.factory')->create(BilletType::class, $billet);
+        
 
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($billet);
+            $em->flush();
 
-            if($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($billet);
-                $em->flush();
-
-                return $this->redirectToRoute(
-                    'louvre_ticket_commandepage', [
-                    'id'=>$billet->getId(),
-                    ]
-                );
-            }
+            return $this->redirectToRoute('louvre_ticket_commandepage', [
+                'code'=>$billet->getCodereservation(),
+            ]);
         }
 
-        return $this->render(
-            'LOUVRETicketBundle:Ticket:form.html.twig', [
+        return $this->render('LOUVRETicketBundle:Ticket:form.html.twig', [
             'form' => $form->createView(),
-            ]
-        );
+        ]);
     }
 
-    public function deleteAction($id,Request $request)
+    public function deleteAction($code,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $billet=  $em->getRepository('LOUVRETicketBundle:Billet')->find($id);
-
+        $billet=  $em->getRepository('LOUVRETicketBundle:Billet')->findOneBy(['codereservation'=>$code]);
+        
         if (is_null($billet)) {
-            throw new NotFoundHttpException("La réservation d'id {$id} n'existe pas.");
+            throw new NotFoundHttpException("La réservation d'id {$code} n'existe pas.");
         }
 
         $em->remove($billet);

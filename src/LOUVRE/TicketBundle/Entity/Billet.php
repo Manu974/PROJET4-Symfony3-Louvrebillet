@@ -64,6 +64,14 @@ class Billet
      * @SansVisiteur()
      */
     private $visiteurs;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codereservation", type="string", length=255, nullable=true)
+     */
+    private $codereservation;
     
     
   
@@ -195,5 +203,31 @@ class Billet
     public function getVisiteurs()
     {
         return $this->visiteurs;
+    }
+
+ 
+
+    /**
+     * Set codereservation
+     *
+     * @param string $codereservation
+     *
+     * @return Billet
+     */
+    public function setCodereservation($codereservation)
+    {
+        $this->codereservation = $codereservation;
+
+        return $this;
+    }
+
+    /**
+     * Get codereservation
+     *
+     * @return string
+     */
+    public function getCodereservation()
+    {
+        return $this->codereservation;
     }
 }

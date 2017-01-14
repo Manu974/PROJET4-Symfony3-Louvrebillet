@@ -36,6 +36,7 @@ class BilletType extends AbstractType
                 'journeecomplete', ChoiceType::class, [
                 'label' => 'Journée complète ou Demi-journée ?',          
                 'choices' => [
+
                     'Journée' => 'Journée',
                     'Demi-journée' => 'Demi-journée',
                 ],

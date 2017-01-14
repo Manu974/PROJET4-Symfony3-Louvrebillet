@@ -6,6 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use LOUVRE\TicketBundle\Validator\Fermeture;
+use LOUVRE\TicketBundle\Validator\JourPasse;
+use LOUVRE\TicketBundle\Validator\Demijournee;
+use LOUVRE\TicketBundle\Validator\SansVisiteur;
+use LOUVRE\TicketBundle\Validator\MaxBillets;
+
 
 
 /**
@@ -28,8 +33,11 @@ class Billet
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datedevisite", type="date")
+     * @ORM\Column(name="datedevisite", type="datetime")
      * @Fermeture()
+     * 
+     * @JourPasse()
+     * @MaxBillets()
      */
     private $datedevisite;
     
@@ -38,16 +46,32 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="journeecomplete", type="string", length=255)
+     * @Demijournee()
      */
     private $journeecomplete;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="LOUVRE\TicketBundle\Entity\Visiteur",  mappedBy="billet", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="LOUVRE\TicketBundle\Entity\Visiteur",  mappedBy="billet", cascade={"all"})
      * 
-     *
+     * @SansVisiteur()
      */
     private $visiteurs;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codereservation", type="string", length=255, nullable=true)
+     */
+    private $codereservation;
     
     
   
@@ -55,7 +79,8 @@ class Billet
 
     public function __construct()
     {
-        $this->date         = new \Datetime();
+         
+        $this->date         =  new \Datetime('now', new \DateTimeZone('Europe/Paris'));
         $this->visiteurs   = new ArrayCollection();
         
     }
@@ -120,6 +145,30 @@ class Billet
         return $this->journeecomplete;
     }
 
+     /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Visiteur
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     /**
      * Add visiteur
      *
@@ -130,6 +179,8 @@ class Billet
     public function addVisiteur(\LOUVRE\TicketBundle\Entity\Visiteur $visiteur)
     {
         $this->visiteurs[] = $visiteur;
+        
+        $visiteur->setBillet($this);
 
         return $this;
     }
@@ -153,4 +204,6 @@ class Billet
     {
         return $this->visiteurs;
     }
+
+ 
 }

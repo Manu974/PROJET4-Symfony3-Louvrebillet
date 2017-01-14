@@ -17,8 +17,9 @@ class Generation
         { 
             $code_aleatoire .= substr($characts, rand()%(strlen($characts)), 1); 
         }
-
-        return $code_aleatoire; 
+        
+        return $code_aleatoire;
+         
 
     }
 }

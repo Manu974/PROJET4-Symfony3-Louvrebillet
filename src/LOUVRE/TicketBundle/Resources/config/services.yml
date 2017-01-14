@@ -13,4 +13,4 @@ services:
 
     louvre_ticket.maildeconfirmation:
             class: LOUVRE\TicketBundle\MailConfirmation\Mail
-            arguments: ["@doctrine.orm.entity_manager",'@louvre_ticket.prixbillet','@louvre_ticket.codereservation','@twig','@mailer']
+            arguments: ["@doctrine.orm.entity_manager",'@louvre_ticket.prixbillet','@twig','@mailer']

@@ -1,9 +1,9 @@
 louvre_ticket_finalisationpage:
-    path:    /finalisation/{id}
+    path:    /finalisation/{code}
     defaults: { _controller: LOUVRETicketBundle:Finalisation:mail }
     
 louvre_ticket_commandepage:
-    path:    /commande/{id}
+    path:    /commande/{code}
     defaults: { _controller: LOUVRETicketBundle:Paiement:commande }
     
 louvre_ticket_reservationpage:
@@ -15,7 +15,7 @@ louvre_ticket_remerciementpage:
     defaults: { _controller: LOUVRETicketBundle:Remerciement:thanks }
 
 louvre_ticket_annulerpage:
-    path:    /delete/{id}
+    path:    /delete/{code}
     defaults: { _controller: LOUVRETicketBundle:Reservation:delete }
     
     

@@ -18,8 +18,8 @@ var handler = StripeCheckout.configure({
   token: function(token) {
     $.post('',{ token: token.id, mail: token.email},function(){
 
-      var url="http://localhost/SymfonyP3/web/app_dev.php/finalisation/"+{{id}};
-      
+      var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
+      console.log(url);
       window.location.replace(url);
       
     });
@@ -42,7 +42,7 @@ document.getElementById('payerButton').addEventListener('click', function(e) {
 
 document.getElementById('supprimerButton').addEventListener('click',function(){
 
-var url="http://localhost/SymfonyP3/web/app_dev.php/delete/"+{{id}};
+var url="http://localhost/SymfonyP3/web/app_dev.php/delete/{{code}}";
       
       window.location.replace(url);    
 

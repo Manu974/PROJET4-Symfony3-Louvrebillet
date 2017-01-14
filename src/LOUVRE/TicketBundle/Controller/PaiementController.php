@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaiementController extends Controller
 {
-    public function commandeAction($id,Request $request)
+    public function commandeAction($code,Request $request)
     {
 
         $repository = $this
@@ -24,9 +24,8 @@ class PaiementController extends Controller
             ->getManager()
             ->getRepository('LOUVRETicketBundle:Billet');
 
-        $billet= $repository->find($id);
-
-    
+        $billet= $repository->findOneBy(['codereservation'=>$code]);
+        
         $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
         
         if ($request->isMethod('POST')) {
@@ -36,14 +35,13 @@ class PaiementController extends Controller
             $token = $_POST['token'];
             // Create a charge: this will charge the user's card
             try {
-                $charge = \Stripe\Charge::create(
-                    array(
+
+                $charge = \Stripe\Charge::create([
                     "amount" => $prixBillet, // Amount in cents
                     "currency" => "eur",
                     "source" => $token,
                     "description" => "Example charge"
-                    )
-                );
+                    ]);
 
             } catch(\Stripe\Error\Card $e) {
                 // The card has been declined
@@ -56,7 +54,7 @@ class PaiementController extends Controller
         return $this->render(
             'LOUVRETicketBundle:Commande:payement.html.twig', [
             'amount' => $prixBillet,
-            'id'=> $id,
+            'code'=> $code,
             'email'=> $billet->getEmail(),
             'clestripe'=> $this->getParameter('clePublicStripe'),
             'listVisiteurs'=> $billet->getVisiteurs(),

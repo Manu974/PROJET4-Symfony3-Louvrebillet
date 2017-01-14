@@ -10,24 +10,24 @@ class Mail
     protected $twig;
     protected $mailer;
 
-    public function __construct(EntityManager $em,$prixbillet,$codereservation,\Twig_Environment $twig,\Swift_Mailer $mailer)
+    public function __construct(EntityManager $em,$prixbillet,\Twig_Environment $twig,\Swift_Mailer $mailer)
     {
         $this->database = $em->getRepository('LOUVRETicketBundle:Billet');
         $this->prixbillet= $prixbillet;
-        $this->codereservation= $codereservation;
+        //$this->codereservation= $codereservation;
         $this->twig = $twig;
         $this->mailer = $mailer;
         
     }
 
-    public function envoi_mail_confirmation($id)
+    public function envoi_mail_confirmation($code)
     {
-        $billet= $this->database->find($id);
+        $billet= $this->database->findOneBy(['codereservation'=>$code]);
         $email=$billet->getEmail();
         $listVisiteurs= $billet->getVisiteurs();
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->prixbillet->prixTotal($billet->getVisiteurs());
-        $codereservation=$this->codereservation->codeReservation();
+        
         
         
         $message = \Swift_Message::newInstance();
@@ -43,7 +43,7 @@ class Mail
                     'listVisiteurs'=>$listVisiteurs,
                     'dateDeResevartion'=> $dateDeResevartion->format('d-m-Y'),
                     'tarif'=>$prixdubillet/100,
-                    'codeReservation'=>$codereservation,
+                    'codeReservation'=>$code,
                     'urlImage'=>$logoLouvre,
 
                     ]
