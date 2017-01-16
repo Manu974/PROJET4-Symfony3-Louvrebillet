@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 
 
@@ -51,11 +53,19 @@ class ReservationController extends Controller
         $billet=  $em->getRepository('LOUVRETicketBundle:Billet')->findOneBy(['codereservation'=>$code]);
         
         if (is_null($billet)) {
-            throw new NotFoundHttpException("La réservation d'id {$code} n'existe pas.");
+            throw new NotFoundHttpException("La réservation {$code} n'existe pas.");
         }
 
-        $em->remove($billet);
-        $em->flush();
+        else if($billet->getPaiement()) {
+            $request->getSession()->getFlashBag()->add('notice', 'Paiement effetué, cette réservation ne peut pas être supprimer');
+            return $this->render('LOUVRETicketBundle:Ticket:delete.html.twig');
+        }
+
+        else{
+            $em->remove($billet);
+            $em->flush();
+        }
+        
 
         return $this->redirectToRoute('louvre_ticket_reservationpage');
     }
