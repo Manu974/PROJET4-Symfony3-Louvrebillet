@@ -72,6 +72,13 @@ class Billet
      * @ORM\Column(name="codereservation", type="string", length=255, nullable=true)
      */
     private $codereservation;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="paiement", type="boolean", nullable=true)
+     */
+    private $paiement;
     
     
   
@@ -229,5 +236,29 @@ class Billet
     public function getCodereservation()
     {
         return $this->codereservation;
+    }
+
+    /**
+     * Set paiement
+     *
+     * @param boolean $paiement
+     *
+     * @return Billet
+     */
+    public function setPaiement($paiement)
+    {
+        $this->paiement = $paiement;
+
+        return $this;
+    }
+
+    /**
+     * Get paiement
+     *
+     * @return boolean
+     */
+    public function getPaiement()
+    {
+        return $this->paiement;
     }
 }

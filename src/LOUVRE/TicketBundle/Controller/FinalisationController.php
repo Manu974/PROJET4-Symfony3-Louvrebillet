@@ -18,7 +18,17 @@ class FinalisationController extends Controller
 {
     public function mailAction($code,Request $request)
     {
+    	$repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LOUVRETicketBundle:Billet');
+    	$billet= $repository->findOneBy(['codereservation'=>$code]);
+    	$billet->setPaiement(1);
     	
+    	$em = $this->getDoctrine()->getManager();
+    	$em->persist($billet);
+    	$em->flush();
+
         $this->container->get('louvre_ticket.maildeconfirmation')->envoi_mail_confirmation($code);
 
         return $this->redirectToRoute('louvre_ticket_remerciementpage');

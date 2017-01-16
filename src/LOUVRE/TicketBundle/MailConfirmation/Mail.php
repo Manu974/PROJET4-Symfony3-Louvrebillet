@@ -18,16 +18,16 @@ class Mail
         $this->twig = $twig;
         $this->mailer = $mailer;
         
+        
     }
 
     public function envoi_mail_confirmation($code)
     {
-        $billet= $this->database->findOneBy(['codereservation'=>$code]);
+        $billet= $this->database->findOneBy(['codereservation'=>$code]);     
         $listVisiteurs= $billet->getVisiteurs();
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->prixbillet->prixTotal($billet->getVisiteurs());
         $email=$billet->getEmail();
-        
         
         
         $message = \Swift_Message::newInstance();
