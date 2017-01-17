@@ -24,8 +24,10 @@ class ReservationController extends Controller
     public function reservationAction(Request $request)
     {
         $billet= new Billet();
-        $billet->setDatedevisite(new \Datetime('now', new \DateTimeZone('Europe/Paris')));//prérempli le champs date de visite avec la date d'aujourd'hui
+        $billet->setDatedevisite(new \Datetime('now', new \DateTimeZone('Europe/Paris')));
         $billet->setCodereservation($this->container->get('louvre_ticket.codereservation')->codeReservation());
+        $billet->setPaiement(0);
+        
         $form = $this->get('form.factory')->create(BilletType::class, $billet);
         
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {

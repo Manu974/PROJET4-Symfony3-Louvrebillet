@@ -5,20 +5,19 @@ namespace LOUVRE\TicketBundle\GenerationCode;
 
 class Generation
 {
+    const NOMBRE_CARACTERE = 8;
+    const CARACTERES_POSSIBLES ='ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
     public function codeReservation()
     {
-        $characts    = 'abcdefghijklmnopqrstuvwxyz';
-        $characts   .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';    
-        $characts   .= '1234567890'; 
-        $code_aleatoire      = ''; 
+        $codeAleatoire = ''; 
 
-        for($i=0;$i < 8;$i++)    //8 est le nombre de caractères
+        for($i=0;$i < self::NOMBRE_CARACTERE;$i++)
         { 
-            $code_aleatoire .= substr($characts, rand()%(strlen($characts)), 1); 
+            $codeAleatoire .= substr(self::CARACTERES_POSSIBLES, rand()%(strlen(self::CARACTERES_POSSIBLES)), 1); 
         }
         
-        return $code_aleatoire;
+        return $codeAleatoire;
     }
 }
     
