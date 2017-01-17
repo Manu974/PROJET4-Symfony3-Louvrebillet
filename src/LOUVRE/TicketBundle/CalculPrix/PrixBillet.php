@@ -54,11 +54,9 @@ class PrixBillet
                 }
 
             }
-        
-            
+                  
         }
         return $amount;
     }
-
 
 }

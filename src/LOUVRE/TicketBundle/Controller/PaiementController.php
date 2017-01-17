@@ -30,25 +30,23 @@ class PaiementController extends Controller
         
         if ($request->isMethod('POST')) {
             \Stripe\Stripe::setApiKey($this->getParameter('cleSecretStripe'));
-
             // Get the credit card details submitted by the form
             $token = $_POST['token'];
             // Create a charge: this will charge the user's card
             try {
-
                 $charge = \Stripe\Charge::create([
                     "amount" => $prixBillet, // Amount in cents
                     "currency" => "eur",
                     "source" => $token,
                     "description" => "Example charge"
-                    ]);
+                ]);
 
-            } catch(\Stripe\Error\Card $e) {
+            } 
+            catch(\Stripe\Error\Card $e) {
                 // The card has been declined
             }
 
             $request->getSession()->getFlashBag()->add('notice', 'Paiement effetué, vous recevrez dans quelques minutes un mail de confirmation à imprimer en guise de billet!');
-
         }
  
         return $this->render(
@@ -60,8 +58,6 @@ class PaiementController extends Controller
             'listVisiteurs'=> $billet->getVisiteurs(),
             'datedereservation'=> $billet->getDatedevisite()->format('d-m-Y'),
             'typedebillet'=>$billet->getJourneecomplete(),
-            ]
-        );
+        ]);
     }
-
 }

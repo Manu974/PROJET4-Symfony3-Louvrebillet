@@ -14,11 +14,8 @@ class Mail
     {
         $this->database = $em->getRepository('LOUVRETicketBundle:Billet');
         $this->prixbillet= $prixbillet;
-        //$this->codereservation= $codereservation;
         $this->twig = $twig;
         $this->mailer = $mailer;
-        
-        
     }
 
     public function envoi_mail_confirmation($code)
@@ -28,8 +25,7 @@ class Mail
         $dateDeResevartion= $billet->getDatedevisite();
         $prixdubillet=$this->prixbillet->prixTotal($billet->getVisiteurs());
         $email=$billet->getEmail();
-        
-        
+         
         $message = \Swift_Message::newInstance();
         $logoLouvre= $message->embed(\Swift_Image::fromPath('../web/bundles/louvreticket/images/logo_louvre.png'));
         
@@ -45,14 +41,11 @@ class Mail
                     'tarif'=>$prixdubillet/100,
                     'codeReservation'=>$code,
                     'urlImage'=>$logoLouvre,
-                    
-
                     ]
                 ),
                 'text/html'
             );
         
         $this->mailer->send($message);
-
     }
 }

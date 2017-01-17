@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RemerciementController extends Controller
 {
-
     public function thanksAction()
     {
         return $this->render('LOUVRETicketBundle:Ticket:remerciement.html.twig');

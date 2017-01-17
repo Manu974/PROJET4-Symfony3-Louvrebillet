@@ -22,6 +22,7 @@ class FinalisationController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('LOUVRETicketBundle:Billet');
+            
     	$billet= $repository->findOneBy(['codereservation'=>$code]);
     	$billet->setPaiement(1);
     	

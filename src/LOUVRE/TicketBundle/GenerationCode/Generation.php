@@ -19,8 +19,6 @@ class Generation
         }
         
         return $code_aleatoire;
-         
-
     }
 }
     
