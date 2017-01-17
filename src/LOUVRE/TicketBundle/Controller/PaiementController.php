@@ -25,6 +25,7 @@ class PaiementController extends Controller
             ->getRepository('LOUVRETicketBundle:Billet');
 
         $billet= $repository->findOneBy(['codereservation'=>$code]);
+        $statusCommande=$billet->getPaiement();
         
         $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
         
@@ -48,7 +49,7 @@ class PaiementController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Paiement effetué, vous recevrez dans quelques minutes un mail de confirmation à imprimer en guise de billet!');
         }
- 
+
         return $this->render(
             'LOUVRETicketBundle:Commande:payement.html.twig', [
             'amount' => $prixBillet,
@@ -58,6 +59,7 @@ class PaiementController extends Controller
             'listVisiteurs'=> $billet->getVisiteurs(),
             'datedereservation'=> $billet->getDatedevisite()->format('d-m-Y'),
             'typedebillet'=>$billet->getJourneecomplete(),
+            'statusCommande'=>$statusCommande,
         ]);
     }
 }

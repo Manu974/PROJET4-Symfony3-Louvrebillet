@@ -10,8 +10,11 @@
 <button id="payerButton" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Payer</button>
 <button id="supprimerButton" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Annuler la réservation</button>
 
-<script>
-var handler = StripeCheckout.configure({
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+
+  var handler = StripeCheckout.configure({
   key: '{{clestripe}}',
   image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
   locale: 'auto',
@@ -26,33 +29,50 @@ var handler = StripeCheckout.configure({
   }
 });
 
-document.getElementById('payerButton').addEventListener('click', function(e) {
-  // Open Checkout with further options:
-  handler.open({
-    name: 'Musée du Louvre',
-    description: 'entrez vos informations bancaires',
-    amount: {{amount}},
-    currency: 'EUR',
-    email: '{{email}}',
-    allowRememberMe: false,
-    
-  });
-  e.preventDefault();
-});
+  if ('{{statusCommande}}'=='1') {
 
-document.getElementById('supprimerButton').addEventListener('click',function(){
+    $('#supprimerButton').replaceWith('<button id="redirectionHome" class="btn btn-success"><span class="glyphicon glyphicon-calendar"></span>Commander un nouveau billet</button>');
 
-var url="http://localhost/SymfonyP3/web/app_dev.php/delete/{{code}}";
+    $('#payerButton').addClass('disabled btn btn-warning');
+    $('#payerButton').text('Commande Payée');
+
+    $('#redirectionHome').click(function() {
+
+      $('#redirectionHome').addClass('disabled');
+      window.location.replace('http://localhost/SymfonyP3/web/app_dev.php/reservation');
+
+    });
+  }
+
+  else {
+    $('#payerButton').click(function(e) {
       
-      window.location.replace(url);    
+      handler.open({
+        name: 'Musée du Louvre',
+        description: 'entrez vos informations bancaires',
+        amount: {{amount}},
+        currency: 'EUR',
+        email: '{{email}}',
+        allowRememberMe: false,
+        
+      });
+      e.preventDefault();
+    });
 
-});
+     $('#supprimerButton').click(function(){
 
-// Close Checkout on page navigation:
-window.addEventListener('popstate', function() {
+    var url="http://localhost/SymfonyP3/web/app_dev.php/delete/{{code}}";
+          
+          window.location.replace(url);    
 
-  handler.close();
-  
+    });
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+
+      handler.close();
+      
+    });
+  }  
 });
 
 
