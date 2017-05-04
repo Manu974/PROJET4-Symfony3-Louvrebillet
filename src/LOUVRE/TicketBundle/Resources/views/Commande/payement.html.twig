@@ -21,12 +21,13 @@ $(function() {
   token: function(token) {
     $.post('',{ token: token.id, mail: token.email},function(){
 
+      
       var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
       console.log(url);
-      window.location.replace(url);
+      //window.location.replace(url);
 
-      //$('body').html('<img src="http://www.mediaforma.com/sdz/jquery/ajax-loader.gif">');
-      //$('body').load(url);
+      $('body').html('<img src="http://www.mediaforma.com/sdz/jquery/ajax-loader.gif">');
+      $('body').load(url);
       
     });
   }
