@@ -10,6 +10,7 @@ use LOUVRE\TicketBundle\Validator\JourPasse;
 use LOUVRE\TicketBundle\Validator\Demijournee;
 use LOUVRE\TicketBundle\Validator\SansVisiteur;
 use LOUVRE\TicketBundle\Validator\MaxBillets;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
 
@@ -46,7 +47,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="journeecomplete", type="string", length=255)
-     * @Demijournee()
+     * 
      */
     private $journeecomplete;
 
@@ -81,8 +82,30 @@ class Billet
     private $paiement;
     
     
-  
+    /**
+    *   @Assert\Callback
+    */
+    public function isDateValid(ExecutionContextInterface $context)
+    {
+        $dateSelect = $this->getDatedevisite();
 
+        $dateTodayStart = new \Datetime('now');
+        $dateTodayStart->setTime(14,00);
+        $dateTodayEnd = new \Datetime('now');
+        $dateTodayEnd->setTime(23,00);
+
+        $statusJournee = $this->getJourneecomplete();
+        if (($dateSelect > $dateTodayStart && $dateSelect<$dateTodayEnd) && $statusJournee=='Journée')
+        {
+            $context
+                ->BuildViolation("Vous ne pouvez plus commander de billet 'Journée' après 14h00")
+                ->atPath('journeecomplete')
+                ->addViolation();
+        }
+       
+        
+
+    }
 
     public function __construct()
     {
