@@ -13,10 +13,12 @@ class PrixBillet
         foreach ($nbDeVisiteurs as $visiteur) {
             $dateDeNaissance=$visiteur->getDatedenaissance();
             $tarifReduit=$visiteur->getTarifreduit();
+            $daystatus = $visiteur->getBillet()->getJourneecomplete();
 
+         
             $ageVisiteur= (int) $dateDeNaissance->diff($today)->format('%y');
 
-            if(!$tarifReduit) {
+            if(!$tarifReduit && $daystatus == 'Journée') {
 
                 if($ageVisiteur>=4 && $ageVisiteur<12) {
                     $amount +=800;
@@ -35,7 +37,26 @@ class PrixBillet
 
             }
 
-            else {
+         if(!$tarifReduit && $daystatus =='Demi-journée') {
+
+                if($ageVisiteur>=4 && $ageVisiteur<12) {
+                    $amount +=600;
+                }
+
+                else if ($ageVisiteur>=12 && $ageVisiteur<60) {
+                    $amount+=1400;
+                }
+                else if ($ageVisiteur>=60) {
+                    $amount+=1100;
+                }
+                else if ($ageVisiteur<4) {
+
+                    $amount+=0;
+                }
+
+            }
+
+         if($tarifReduit && $daystatus == 'Journée') {
 
                 if($ageVisiteur>=4 && $ageVisiteur<12) {
                     $amount +=800;
@@ -44,7 +65,25 @@ class PrixBillet
                 else if ($ageVisiteur>=12 && $ageVisiteur<60) {
                     $amount+=1000;
                 }
-               
+                else if ($ageVisiteur>=60) {
+                    $amount+=1000;
+                }
+                else if ($ageVisiteur<4) {
+
+                    $amount+=0;
+                }
+
+            }
+
+         if($tarifReduit && $daystatus == 'Demi-journée') {
+
+                if($ageVisiteur>=4 && $ageVisiteur<12) {
+                    $amount +=600;
+                }
+
+                else if ($ageVisiteur>=12 && $ageVisiteur<60) {
+                    $amount+=1000;
+                }
                 else if ($ageVisiteur>=60) {
                     $amount+=1000;
                 }
@@ -56,6 +95,7 @@ class PrixBillet
             }
                   
         }
+      
         return $amount;
     }
 
