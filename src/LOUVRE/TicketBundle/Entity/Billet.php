@@ -88,20 +88,29 @@ class Billet
     public function isDateValid(ExecutionContextInterface $context)
     {
         $dateSelect = $this->getDatedevisite();
+        $dateCompare = new \Datetime('now');
 
         $dateTodayStart = new \Datetime('now');
         $dateTodayStart->setTime(14,00);
         $dateTodayEnd = new \Datetime('now');
         $dateTodayEnd->setTime(23,00);
+        
 
         $statusJournee = $this->getJourneecomplete();
-        if (($dateSelect > $dateTodayStart && $dateSelect<$dateTodayEnd) && $statusJournee=='Journée')
-        {
+        if($dateSelect->format('d-m-y') == $dateCompare->format('d-m-y')){
+            $dateCurrent= new \Datetime('now', new \DateTimeZone('Europe/Paris'));
+
+            if (($dateCurrent > $dateTodayStart && $dateCurrent<$dateTodayEnd) && $statusJournee=='Journée')
+            {
             $context
                 ->BuildViolation("Vous ne pouvez plus commander de billet 'Journée' après 14h00")
                 ->atPath('journeecomplete')
                 ->addViolation();
+            }
+
         }
+
+        
        
         
 
