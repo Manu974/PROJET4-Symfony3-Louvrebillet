@@ -20,17 +20,37 @@ $(function() {
   locale: 'auto',
   token: function(token) {
 
+    
+
+
     $.ajax('',{
       type: 'POST',
       data :  {'token': token.id, 'mail': token.email},
+      beforeSend: function(){
+
+        $('#supprimerButton').css('display','none');
+        $('#payerButton').css('display','none');
+        $('#h3commande').replaceWith('<h3> Traiement de vorte commande en cours</h3>');
+        $('#firstbodypanel').replaceWith('<div id="imagetraitement"><img src="http://www.mediaforma.com/sdz/jquery/ajax-loader.gif"></div>');
+        $('#imagetraitement').css('align-content', 'center');
+        //$('body').html('<img src="http://www.mediaforma.com/sdz/jquery/ajax-loader.gif">');
+
+        
+      
+
+      },
       success: function(){
          var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
-      console.log(url);
-      window.location.replace(url);
+      
+      $('body').load(url);
     },
     error: function(){
       alert(data);
     }
+    });
+
+    $(document).ajaxSend(function(ev,req,options){
+        console.log('send');
     });
   }
 });
@@ -78,8 +98,11 @@ $(function() {
       handler.close();
       
     });
-  }  
+  }
+
 });
+
+
 
 
 </script>

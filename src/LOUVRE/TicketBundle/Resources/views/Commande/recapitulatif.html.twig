@@ -1,6 +1,6 @@
 {# src/Louvre/TicketBundle/Resources/views/Commande/recapitulatif.html.twig #}
 
-<h3>Récapitulatif de votre commande</h3>
+<h3 id="h3commande">Récapitulatif de votre commande</h3>
 
 
 <div class="panel panel-primary">
@@ -8,7 +8,7 @@
 		<h4 class="panel-title"> Reservation pour le {{datedereservation}} pour la {{typedebillet}} </h4>
 	</div>
 
-	<div class="panel-body">
+	<div class="panel-body" id="firstbodypanel">
 		<h4>Nombre de visiteurs</h4>
 		<ul class="list-group">
 			{% for visiteur in listVisiteurs %}
