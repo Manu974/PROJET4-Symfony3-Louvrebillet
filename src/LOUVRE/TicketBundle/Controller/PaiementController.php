@@ -39,7 +39,7 @@ class PaiementController extends Controller
                     "amount" => $prixBillet, // Amount in cents
                     "currency" => "eur",
                     "source" => $token,
-                    "description" => "Example charge"
+                    "description" => "paiement billet"
                 ]);
 
             } 

@@ -35,7 +35,6 @@ class ReservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($billet);
             $em->flush();
-
             return $this->redirectToRoute('louvre_ticket_commandepage', [
                 'code'=>$billet->getCodereservation(),
             ]);

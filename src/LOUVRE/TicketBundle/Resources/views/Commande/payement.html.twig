@@ -19,16 +19,18 @@ $(function() {
   image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
   locale: 'auto',
   token: function(token) {
-    $.post('',{ token: token.id, mail: token.email},function(){
 
-      
-      var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
+    $.ajax('',{
+      type: 'POST',
+      data :  {'token': token.id, 'mail': token.email},
+      success: function(){
+         var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
       console.log(url);
-      //window.location.replace(url);
-
-      $('body').html('<img src="http://www.mediaforma.com/sdz/jquery/ajax-loader.gif">');
-      $('body').load(url);
-      
+      window.location.replace(url);
+    },
+    error: function(){
+      alert(data);
+    }
     });
   }
 });
