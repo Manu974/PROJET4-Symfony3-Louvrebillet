@@ -13,22 +13,26 @@
   </div>
 
   <button id="redirectionHome" class="btn btn-success"><span class="glyphicon glyphicon-calendar"></span>Commander un nouveau billet</button>
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script type="text/javascript">
-
-  $(function() {
-
-  	$('#redirectionHome').click(function() {
-
-  		$('#redirectionHome').addClass('disabled');
-  		window.location.replace('http://localhost/SymfonyP3/web/app_dev.php/reservation');
-
-  	});
-  	
-  });
-  </script>
-
+ 
 
 
 {% endblock %}
+
+   {% block javascripts %}
+    {{ parent() }}
+
+     <script type="text/javascript">
+
+  $(function() {
+
+    $('#redirectionHome').click(function() {
+
+      $('#redirectionHome').addClass('disabled');
+      window.location.replace('http://localhost/SymfonyP3/web/app_dev.php/reservation');
+
+    });
+    
+  });
+  </script>
+
+    {% endblock %}

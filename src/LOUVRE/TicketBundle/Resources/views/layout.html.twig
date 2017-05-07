@@ -44,8 +44,11 @@
     </div>
 
     {% block javascripts %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="{{ asset('bundles/louvreticket/lib/jquery/jquery.min.js') }}"></script>
+    <!-- JavaScript Boostrap plugin -->
+    <script src="{{ asset('bundles/louvreticket/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+
     {% endblock %}
 
 </body>

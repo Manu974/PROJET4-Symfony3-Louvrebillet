@@ -10,8 +10,14 @@
 <button id="payerButton" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Payer</button>
 <button id="supprimerButton" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Annuler la réservation</button>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript">
+
+{% endblock %}
+
+
+   {% block javascripts %}
+    {{ parent() }}
+    
+    <script type="text/javascript">
 $(function() {
 
   var handler = StripeCheckout.configure({
@@ -102,10 +108,7 @@ $(function() {
 
 });
 
-
-
-
 </script>
-{% endblock %}
+    {% endblock %}
 
 
