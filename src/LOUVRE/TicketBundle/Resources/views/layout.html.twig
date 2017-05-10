@@ -10,7 +10,7 @@
     <title>{% block title %}Reservation Ticket Musée du LOUVRE{% endblock %}</title>
 
     {% block stylesheets %} {# On charge le CSS de bootstrap depuis le site directement #}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> {% endblock %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> {% endblock %}
 </head>
 
 <body>
@@ -22,13 +22,22 @@
 
         <div class="row">
             <div id="menu" class="col-md-3">
-            <h3>Tarifs</h3>
+            <h3>Tarifs Journée</h3>
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-info">Normal à partir de 12ans : 16€</li>
-                    <li class="list-group-item list-group-item-info">Enfant de 4 à 12ans: 8€</li>
-                    <li class="list-group-item list-group-item-info">Senior à partir de 60ans: 12€</li>
-                    <li class="list-group-item list-group-item-warning">"Tarif réduit" 10€ pour éudiant, employé de musée, service du Ministère de la Culture, militaire....</li>
-                    <li class="list-group-item list-group-item-success">Entrée gratuite pour enfant moins de 4ans</li>
+                    <li class="list-group-item list-group-item-info">Normal à partir de 12 ans : <strong>16€</strong></li>
+                    <li class="list-group-item list-group-item-info">Enfant de 4 à 12 ans: <strong>8€</strong></li>
+                    <li class="list-group-item list-group-item-info">Senior à partir de 60 ans: <strong>12€</strong></li>
+                </ul>
+            <h3>Tarifs Demi-Journée</h3>
+                 <ul class="list-group">
+                    <li class="list-group-item list-group-item-info">Normal à partir de 12 ans : <strong>14€</strong></li>
+                    <li class="list-group-item list-group-item-info">Enfant de 4 à 12 ans: <strong>6€</strong></li>
+                    <li class="list-group-item list-group-item-info">Senior à partir de 60 ans: <strong>11€</strong></li>            
+                </ul>
+            <h3>Tarifs Réduit</h3>
+                 <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning">"Tarif réduit" <strong>10€</strong> pour éudiant, employé de musée, service du Ministère de la Culture, militaire....</li>
+                    <li class="list-group-item list-group-item-success"><strong>Entrée gratuite</strong> pour enfant moins de 4ans</li>
                 </ul>
             </div>
             <div id="content" class="col-md-9">
@@ -45,9 +54,9 @@
 
     {% block javascripts %}
     <!-- jQuery -->
-    <script src="{{ asset('bundles/louvreticket/lib/jquery/jquery.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- JavaScript Boostrap plugin -->
-    <script src="{{ asset('bundles/louvreticket/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     {% endblock %}
 
