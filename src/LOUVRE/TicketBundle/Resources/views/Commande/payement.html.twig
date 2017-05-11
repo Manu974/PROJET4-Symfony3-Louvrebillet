@@ -46,7 +46,8 @@ $(function() {
 
       },
       success: function(){
-         var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
+        var url= "{{ path('louvre_ticket_finalisationpage',{'code': code}) }}";
+         //var url='http://localhost/SymfonyP3/web/app_dev.php/finalisation/{{code}}';
       
       $('body').load(url);
     },
@@ -71,7 +72,8 @@ $(function() {
     $('#redirectionHome').click(function() {
 
       $('#redirectionHome').addClass('disabled');
-      window.location.replace('http://localhost/SymfonyP3/web/app_dev.php/reservation');
+      var urlHome= "{{ path('louvre_ticket_reservationpage') }}";
+      window.location.replace(urlHome);
 
     });
   }
@@ -93,9 +95,8 @@ $(function() {
 
      $('#supprimerButton').click(function(){
 
-    var url="http://localhost/SymfonyP3/web/app_dev.php/delete/{{code}}";
-          
-          window.location.replace(url);    
+    var urlHome= "{{ path('louvre_ticket_reservationpage') }}";
+      window.location.replace(urlHome);  
 
     });
     // Close Checkout on page navigation:

@@ -29,7 +29,8 @@
     $('#redirectionHome').click(function() {
 
       $('#redirectionHome').addClass('disabled');
-      window.location.replace('http://localhost/SymfonyP3/web/app_dev.php/reservation');
+      var url= "{{ path('louvre_ticket_reservationpage') }}";
+      window.location.replace(url);
 
     });
     
