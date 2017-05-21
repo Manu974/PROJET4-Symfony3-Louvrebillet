@@ -4,6 +4,7 @@ namespace Tests\AppBundle\CalculPrix;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use LOUVRE\TicketBundle\Entity\Visiteur;
+use LOUVRE\TicketBundle\Entity\Billet;
 use LOUVRE\TicketBundle\CalculPrix\PrixBillet;
 
 class PrixBilletTest extends WebTestCase
@@ -15,10 +16,11 @@ class PrixBilletTest extends WebTestCase
         $format = 'Y-m-d';
 		$date = \DateTime::createFromFormat($format, '2009-02-15');
         $visiteur->setDatedenaissance($date);
+        $daystatus='Journée';
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$visiteur]);
+        $result = $PrixBillet->prixTotal([$visiteur],$daystatus);
 
         $this->assertEquals(800, $result);
     }
@@ -30,10 +32,11 @@ class PrixBilletTest extends WebTestCase
         $format = 'Y-m-d';
 		$date = \DateTime::createFromFormat($format, '2000-02-15');
         $visiteur->setDatedenaissance($date);
+        $daystatus='Journée';
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$visiteur]);
+        $result = $PrixBillet->prixTotal([$visiteur],$daystatus);
 
         $this->assertEquals(1600, $result);
     }
@@ -45,10 +48,11 @@ class PrixBilletTest extends WebTestCase
         $format = 'Y-m-d';
 		$date = \DateTime::createFromFormat($format, '1955-02-15');
         $visiteur->setDatedenaissance($date);
+        $daystatus='Journée';
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$visiteur]);
+        $result = $PrixBillet->prixTotal([$visiteur],$daystatus);
 
         $this->assertEquals(1200, $result);
     }
@@ -60,10 +64,11 @@ class PrixBilletTest extends WebTestCase
         $format = 'Y-m-d';
 		$date = \DateTime::createFromFormat($format, '2016-02-15');
         $visiteur->setDatedenaissance($date);
+        $daystatus='Journée';
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$visiteur]);
+        $result = $PrixBillet->prixTotal([$visiteur],$daystatus);
 
         $this->assertEquals(0, $result);
     }
@@ -76,10 +81,11 @@ class PrixBilletTest extends WebTestCase
 		$date = \DateTime::createFromFormat($format, '1994-02-15');/**à parir de 12ans*/
         $visiteur->setDatedenaissance($date);
         $visiteur->setTarifreduit(true);
+        $daystatus='Journée';
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$visiteur]);
+        $result = $PrixBillet->prixTotal([$visiteur],$daystatus);
 
         $this->assertEquals(1000, $result);
     }
@@ -92,10 +98,11 @@ class PrixBilletTest extends WebTestCase
 		$date = \DateTime::createFromFormat($format, '1954-02-15');/**à parir de 12ans*/
         $visiteur->setDatedenaissance($date);
         $visiteur->setTarifreduit(true);
+        $daystatus='Journée';
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$visiteur]);
+        $result = $PrixBillet->prixTotal([$visiteur],$daystatus);
 
         $this->assertEquals(1000, $result);
     }
@@ -107,6 +114,7 @@ class PrixBilletTest extends WebTestCase
         $Bob = new Visiteur();
         $Emmanuel= new Visiteur();
         $Arnaud= new Visiteur();
+        $daystatus='Journée';
 
         $datedenaissanceBob = \DateTime::createFromFormat($format, '1954-02-15');
 		$Bob->setDatedenaissance($datedenaissanceBob);
@@ -120,7 +128,7 @@ class PrixBilletTest extends WebTestCase
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$Bob, $Emmanuel, $Arnaud]);
+        $result = $PrixBillet->prixTotal([$Bob, $Emmanuel, $Arnaud],$daystatus);
 
         $this->assertEquals(4400, $result);
     }
@@ -154,11 +162,12 @@ class PrixBilletTest extends WebTestCase
 		/**tarif gratuit*/
 		$datedenaissanceEthan = \DateTime::createFromFormat($format, '2015-06-15');
 		$Ethan->setDatedenaissance($datedenaissanceEthan);
+        $daystatus='Journée';
      
 
         $PrixBillet = new PrixBillet();
 
-        $result = $PrixBillet->prixTotal([$Papy, $Emmanuel, $Jade, $Rachel, $Ethan]);
+        $result = $PrixBillet->prixTotal([$Papy, $Emmanuel, $Jade, $Rachel, $Ethan],$daystatus);
 
         $this->assertEquals(5000, $result);
     }

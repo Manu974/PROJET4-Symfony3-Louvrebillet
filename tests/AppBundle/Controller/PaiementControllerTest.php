@@ -10,7 +10,7 @@ class PaiementControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/commande/3');
+        $crawler = $client->request('GET', '/commande/8C0YV52E');
 
         $this->assertContains('Reservation pour', $client->getResponse()->getContent());
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());

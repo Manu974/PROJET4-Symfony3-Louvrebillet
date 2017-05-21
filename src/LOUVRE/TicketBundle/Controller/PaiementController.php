@@ -26,8 +26,11 @@ class PaiementController extends Controller
 
         $billet= $repository->findOneBy(['codereservation'=>$code]);
         $statusCommande=$billet->getPaiement();
+        $nbVisiteurs= $billet->getVisiteurs();
+        $daystatus = $billet->getJourneecomplete();
+
         
-        $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($billet->getVisiteurs());
+        $prixBillet= $this->container->get('louvre_ticket.prixbillet')->prixTotal($nbVisiteurs,$daystatus);
         
         if ($request->isMethod('POST')) {
             \Stripe\Stripe::setApiKey($this->getParameter('cleSecretStripe'));
